@@ -1,20 +1,17 @@
 import Renderer from "../utils/Renderer"
 import Camera from "../utils/Camera"
 import Sizer from "../utils/Sizer"
-import * as THREE from 'three'
+import Scene from "../utils/Scene"
+import SLoader from "../utils/Loader"
 
 class World {
   constructor(canvasEl) {
+    this.loader = SLoader
     this.domElement = canvasEl
     this.sizer = new Sizer()
-    this.scene = new THREE.Scene()
+    this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
-
-    this.geometry = new THREE.BoxGeometry( 1, 1, 1 )
-    this.material = new THREE.MeshBasicMaterial({ color: 0xffff00 })
-    this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.scene.add(this.mesh)
 
     window.addEventListener('resize', () => this.resize())
   }

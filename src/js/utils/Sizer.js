@@ -15,7 +15,6 @@ class Sizer {
     this.height_ = height
   }
 
-
   constructor() {
     this.width_ = window.innerWidth
     this.height_ = window.innerHeight
