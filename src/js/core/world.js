@@ -3,6 +3,7 @@ import Camera from "../utils/Camera"
 import Sizer from "../utils/Sizer"
 import Scene from "../utils/Scene"
 import SLoader from "../utils/Loader"
+import Ton618 from "../models/ton618/Ton618"
 
 class World {
   constructor(canvasEl) {
@@ -12,6 +13,8 @@ class World {
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
+
+    this.ton618 = new Ton618(this)
 
     window.addEventListener('resize', () => this.resize())
   }
