@@ -1,15 +1,13 @@
-uniform vec3 sphereCenter;
-varying vec3 point;
+varying vec2 vUv;
+varying vec4 vPosition;
 
 void main() {    
 
-  // float x = sin(gl_FragCoord.x / 20.0);
-  // float y = sin(gl_FragCoord.y / 20.0);
-  float y = gl_FragCoord.y;
+  float dist = distance(vec2(vPosition.x, vPosition.y), vec2(0.0));
 
-  if (point.y < -0.5) {
-    y = 0.0;
-  }
+  vec3 color = vec3(0.0);
 
-  gl_FragColor = vec4(0.0, y, 0.0, 1.0);
+  color += smoothstep(0.67, 0.69, dist) * (1.0 - smoothstep(0.67, 0.69, dist));
+
+  gl_FragColor = vec4(color, 1.0);
 }

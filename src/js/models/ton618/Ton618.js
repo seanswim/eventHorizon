@@ -9,7 +9,6 @@ class Ton618 {
     this.geometry = new THREE.SphereGeometry( 1, 64, 32 )
     this.material = new THREE.ShaderMaterial({
       uniforms: {
-        sphereCenter: {value: new THREE.Vector3(0, 0, 0)}
       },
       vertexShader: Ton618VertexShader,
       fragmentShader: Ton618FragmentShader,
