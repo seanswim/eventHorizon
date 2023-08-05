@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 class Renderer extends THREE.WebGLRenderer {
   constructor(world) {
-    super({antialias: true, canvas: world.domElement})
+    super({antialias: true, canvas: world.domElement, alpha: true})
     this.world = world
 
     this.setSize(this.world.sizer.width, this.world.sizer.height)

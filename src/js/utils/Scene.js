@@ -4,12 +4,19 @@ class Scene extends THREE.Scene{
   constructor(world) {
     super()
     this.world = world
-   
-    this.texture = this.world.loader.EXRLoader.load('src/assets/starmap/starmap.exr', () => {
-      this.texture.mapping = THREE.EquirectangularRefractionMapping 
-    })
-    this.background = this.texture
+    this.background = new THREE.CubeTextureLoader()
+    .setPath('src/assets/')
+    .load([
+      'right.png',
+      'left.png',
+      'top.png',
+      'bottom.png',
+      'front.png',
+      'back.png',
+    ])
+    this.backgroundIntensity = 0.04
   }
+
 
 }
 

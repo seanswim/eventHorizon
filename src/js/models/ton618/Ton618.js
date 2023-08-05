@@ -1,6 +1,7 @@
 import * as THREE from 'three'
-import Ton618VertexShader from './vertex.glsl?raw'
-import Ton618FragmentShader from './fragment.glsl?raw'
+import Ton618VertexShader from './shaders/vertex.glsl?raw'
+import Ton618FragmentShader from './shaders/fragment.glsl?raw'
+import DimensionCurve from '../components/dimensionCurve/dimensionCurve'
 
 class Ton618 {
   constructor(world) {
@@ -8,17 +9,17 @@ class Ton618 {
 
     this.geometry = new THREE.SphereGeometry( 1, 64, 32 )
     this.material = new THREE.ShaderMaterial({
-      uniforms: {},
+      uniforms: {
+      },
       vertexShader: Ton618VertexShader,
       fragmentShader: Ton618FragmentShader,
-      // envMap: this.world.scene.texture,
-      // reflectivity: 1,
-      // refractionRatio: 0.75
     })
 
     this.mesh = new THREE.Mesh(this.geometry, this.material)
 
-    this.world.scene.add(this.mesh)
+    this.dimensionCurve = new DimensionCurve()
+    
+    this.world.scene.add(this.mesh, this.dimensionCurve.mesh)
   }
 }
 
