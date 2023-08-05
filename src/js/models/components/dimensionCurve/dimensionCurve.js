@@ -1,7 +1,11 @@
 import * as THREE from 'three'
+import FragmentShader from './shaders/fragment.glsl?raw'
+import VertexShader from './shaders/vertex.glsl?raw'
+
 
 class DimensionCurve {
-  constructor() {
+  constructor(world) {
+    this.world = world
     const CubeTextureLoader = new THREE.CubeTextureLoader();
     const envMap = CubeTextureLoader
     .setPath('src/assets/')
@@ -14,14 +18,22 @@ class DimensionCurve {
       'back.png',
     ])
 
-    this.geometry = new THREE.CircleGeometry(3, 32)
-    this.material = new THREE.MeshBasicMaterial({ 
-      envMap: envMap,
-      reflectivity: 1.0,
-      refractionRatio: 0.8
-      // side: THREE.DoubleSide,
-    }); 
+    this.geometry = new THREE.CircleGeometry(1.6, 32)
+    this.material = new THREE.ShaderMaterial({
+      vertexShader: VertexShader,
+      fragmentShader: FragmentShader,
+      uniforms: {
+        envMap: { value: envMap },
+        uTime: { value: 0 }
+      }
+    });
+
     this.mesh = new THREE.Mesh( this.geometry, this.material );
+    this.world.scene.add(this.mesh)
+  }
+
+  update() {
+    this.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
   }
 }
 

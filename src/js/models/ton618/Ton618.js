@@ -16,10 +16,7 @@ class Ton618 {
     })
 
     this.mesh = new THREE.Mesh(this.geometry, this.material)
-
-    this.dimensionCurve = new DimensionCurve()
-    
-    this.world.scene.add(this.mesh, this.dimensionCurve.mesh)
+    this.world.scene.add(this.mesh)
   }
 }
 
