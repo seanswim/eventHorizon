@@ -18,7 +18,7 @@ class DimensionCurve {
       'back.png',
     ])
 
-    this.geometry = new THREE.CircleGeometry(1.6, 32)
+    this.geometry = new THREE.CircleGeometry(3, 32)
     this.material = new THREE.ShaderMaterial({
       vertexShader: VertexShader,
       fragmentShader: FragmentShader,
