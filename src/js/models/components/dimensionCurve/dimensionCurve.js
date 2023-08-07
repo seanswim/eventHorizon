@@ -6,19 +6,12 @@ import VertexShader from './shaders/vertex.glsl?raw'
 class DimensionCurve {
   constructor(world) {
     this.world = world
-    const CubeTextureLoader = new THREE.CubeTextureLoader();
-    const envMap = CubeTextureLoader
+    const TextureLoader = new THREE.TextureLoader();
+    const envMap = TextureLoader
     .setPath('src/assets/')
-    .load([
-      'right.png',
-      'left.png',
-      'top.png',
-      'bottom.png',
-      'front.png',
-      'back.png',
-    ])
+    .load('back.png')
 
-    this.geometry = new THREE.CircleGeometry(3, 32)
+    this.geometry = new THREE.CircleGeometry(3,24)
     this.material = new THREE.ShaderMaterial({
       vertexShader: VertexShader,
       fragmentShader: FragmentShader,

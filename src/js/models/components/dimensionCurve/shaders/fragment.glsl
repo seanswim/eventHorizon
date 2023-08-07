@@ -1,37 +1,30 @@
 varying vec3 vWorldPosition;
-uniform samplerCube envMap;
+uniform sampler2D envMap;
 uniform float uTime;
+varying vec2 vUv;
   
 void main() {
-  vec3 worldNormal = normalize(vWorldPosition.xyz);
-  vec3 reflection = reflect(normalize(cameraPosition - vWorldPosition), worldNormal);
 
-  vec2 st = vec2(reflection.x, reflection.y);
+  vec2 st = vUv - 0.5;
+  float dist = distance(st, vec2(0.0));
+  float distortionStrength = distance(st, vec2(0.0)) * 5.0;
 
-
-  float pct = distance(st, vec2(0.0));
-  float distortionStrength = pow(pct * 2.0, 10.0);
-
-  float s = sin(uTime) * distortionStrength;
-  float c = cos(uTime) * distortionStrength;
+  float s = sin(uTime) * sin(distortionStrength);
+  float c = cos(uTime);
   mat2 rotationMatrix = mat2(c, -s, s, c);
-  vec2 rotatedOffset = rotationMatrix * st;
+  vec2 rotatedOffset = rotationMatrix * st + 0.5;
 
+  // rotatedOffset.x += sin(uTime);
+  // rotatedOffset.y += cos(uTime);
 
-  vec3 color = vec3(0.0);
+  vec4 map = texture2D(envMap, rotatedOffset) * 1.0;
 
+  if (dist > 0.4) {
+    map = texture2D(envMap, vUv);
+  }
 
-  // rotatedOffset.x = distortionStrength;
-  // rotatedOffset.y = distortionStrength;
+  vec4 color = map;
 
-  // color = textureCube(envMap, vec3(rotatedOffset, 1.0)).xyz;
-
-  color = smoothstep(
-    color, 
-    textureCube(envMap, vec3(rotatedOffset, 1.0)).xyz, 
-    vec3 (distortionStrength)
-  );
-
-
-  gl_FragColor = vec4(color, 1.0);
+  // gl_FragColor = vec4(vec3(distortionStrength), 1.0);
+  gl_FragColor = color;
 }
