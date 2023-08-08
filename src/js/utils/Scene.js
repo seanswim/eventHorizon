@@ -14,7 +14,8 @@ class Scene extends THREE.Scene{
       'front.png',
       'back.png',
     ])
-    this.backgroundIntensity = 0.1
+    // this.backgroundIntensity = 0.1
+    this.backgroundIntensity = 0.9
   }
 
 
