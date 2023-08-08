@@ -6,6 +6,7 @@ import SLoader from "../utils/Loader"
 import Ton618 from "../models/ton618/Ton618"
 import * as THREE from 'three'
 import DimensionCurve from "../models/components/dimensionCurve/dimensionCurve"
+import AccretionDisk from "../models/accDisk/AccretionDisk"
 
 class World {
   constructor(canvasEl) {
@@ -18,8 +19,8 @@ class World {
     this.camera = new Camera(this)
 
     this.ton618 = new Ton618(this)
-    this.dimensionCurve = new DimensionCurve(this)
-
+    // this.dimensionCurve = new DimensionCurve(this)
+    this.accretionDisk = new AccretionDisk(this)
     window.addEventListener('resize', () => this.resize())
   }
 
@@ -30,7 +31,7 @@ class World {
 
   update() {
     this.renderer.update()
-    this.dimensionCurve.update()
+    // this.dimensionCurve.update()
     requestAnimationFrame(() => {
       this.update()
     })
