@@ -3,42 +3,32 @@ import * as THREE from 'three'
 class AccretionDisk {
   constructor(world) {
     this.world = world
-    this.geometry = new THREE.BufferGeometry()
-
+    this.geometry = new THREE.CircleGeometry(3, 18)
     this.material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
-
-    const positions = [];
-    const indices = [];
-    const radius = 5;
-    const segments = 32;
-
-    for (let i = 0; i <= segments; i++) {
-      const theta = (i / segments) * Math.PI * 2;
-      const x = Math.cos(theta) * radius;
-      const z = Math.sin(theta) * radius;
-      const deformation = Math.sin(theta * 4) * 2; // Adjust frequency and amplitude as needed
-
-      positions.push(x, deformation, z);
-    }
-
-    for (let i = 0; i < segments; i++) {
-      indices.push(i, i + 1, segments);
-    }
-
-    this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    this.geometry.setIndex(indices);
-
-    console.log(this.geometry)
     
-    // for (let i = 0; i < this.geometry.vertices.length; i++) {
-    //   const vertex = this.geometry.vertices[i];
-    //   const angle = (vertex.x / radius) * Math.PI; // Calculate the angle
-    //   const deformation = Math.sin(angle * frequency) * amplitude; // Calculate deformation
-    //   vertex.z = deformation; // Apply deformation to the vertex z-coordinate
-    // }
+    this.axesHelper = new THREE.AxesHelper( 5 );
+
+    const vertices = this.geometry.attributes.position.array;
+
+    for (let i = 3; i < vertices.length; i=i+3) {
+      let x = vertices[i]
+      let y = vertices[i+1]
+      let z = vertices[i+2]    
+
+      const deformation = Math.tan(Math.PI/180 * i) * i; 
+      // vertices[i] += deformation
+      vertices[i+2] -= deformation/30
+      // vertices[i+2] += Math.random()
+    }
+
+    console.log(vertices)
+
+    this.geometry.attributes.position.array = vertices
+    this.geometry.rotateX(Math.PI / 180 * 90)
+    this.geometry.rotateY(Math.PI / 180 * -90)
     
     this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.world.scene.add(this.mesh)
+    this.world.scene.add(this.mesh, this.axesHelper)
   }
 }
 

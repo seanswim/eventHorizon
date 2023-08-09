@@ -21,6 +21,7 @@ class World {
     this.ton618 = new Ton618(this)
     // this.dimensionCurve = new DimensionCurve(this)
     this.accretionDisk = new AccretionDisk(this)
+
     window.addEventListener('resize', () => this.resize())
   }
 
