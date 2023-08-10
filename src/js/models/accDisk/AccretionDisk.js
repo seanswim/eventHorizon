@@ -3,29 +3,44 @@ import * as THREE from 'three'
 class AccretionDisk {
   constructor(world) {
     this.world = world
-    this.geometry = new THREE.CircleGeometry(3, 18)
-    this.material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
+    this.geometry = new THREE.CircleGeometry(2, 45)
+    this.material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } )
     
     this.axesHelper = new THREE.AxesHelper( 5 );
 
     const vertices = this.geometry.attributes.position.array;
+    const vertices_ = vertices.slice(3)
 
-    for (let i = 3; i < vertices.length; i=i+3) {
-      let x = vertices[i]
-      let y = vertices[i+1]
-      let z = vertices[i+2]    
+    for (let i = 0; i < vertices_.length / 3 / 2; i++) {
+      const alpha = i * 3
+      let leftVertice = {
+        x: vertices_[alpha],
+        y: vertices_[alpha+1],
+        z: vertices_[alpha+2],
+      }
+      let rightVertice = {
+        x: vertices_[vertices_.length - alpha - 3],
+        y: vertices_[vertices_.length - alpha - 2],
+        z: vertices_[vertices_.length - alpha - 1],
+      }
 
-      const deformation = Math.tan(Math.PI/180 * i) * i; 
-      // vertices[i] += deformation
-      vertices[i+2] -= deformation/30
-      // vertices[i+2] += Math.random()
+      const deformation = Math.tan(Math.PI/180 * i / 4) * alpha; 
+
+      const xDeformationStrength = 20;
+      const yDeformationStrength = 100;
+      const zDeformationStrength = 5; 
+
+      vertices[alpha + 3] += deformation / xDeformationStrength
+      vertices[alpha + 1 + 3] += deformation / yDeformationStrength
+      vertices[alpha + 2 + 3] -= deformation / zDeformationStrength
+      vertices[vertices_.length - alpha -3 + 3] += deformation / xDeformationStrength
+      vertices[vertices_.length - alpha -2 + 3] -= deformation / yDeformationStrength
+      vertices[vertices_.length - alpha -1 + 3] -= deformation / zDeformationStrength
     }
 
-    console.log(vertices)
-
     this.geometry.attributes.position.array = vertices
-    this.geometry.rotateX(Math.PI / 180 * 90)
-    this.geometry.rotateY(Math.PI / 180 * -90)
+    this.geometry.rotateY(Math.PI / 180 * -100)
+    this.geometry.rotateZ(Math.PI / 180 * 90)
     
     this.mesh = new THREE.Mesh(this.geometry, this.material)
     this.world.scene.add(this.mesh, this.axesHelper)
