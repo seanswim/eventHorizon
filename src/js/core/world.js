@@ -7,6 +7,7 @@ import Ton618 from "../models/ton618/Ton618"
 import * as THREE from 'three'
 import DimensionCurve from "../models/components/dimensionCurve/dimensionCurve"
 import AccretionDisk from "../models/accDisk/AccretionDisk"
+import SpaceDust from "../models/components/spaceDust/spaceDust"
 
 class World {
   constructor(canvasEl) {
@@ -20,7 +21,11 @@ class World {
 
     this.ton618 = new Ton618(this)
     // this.dimensionCurve = new DimensionCurve(this)
-    this.accretionDisk = new AccretionDisk(this)
+    // this.accretionDisk = new AccretionDisk(this)
+    this.spaceDust = new SpaceDust(this)
+
+    let light = new THREE.AmbientLight(0x555555)
+    this.scene.add(light)
 
     window.addEventListener('resize', () => this.resize())
   }
