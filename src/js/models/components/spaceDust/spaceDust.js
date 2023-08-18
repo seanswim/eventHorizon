@@ -11,7 +11,8 @@ class SpaceDust {
     this.geometry = new THREE.PlaneGeometry(2, 1)
     this.material = new THREE.MeshLambertMaterial({
       map: textureMap,
-      transparent: true
+      transparent: true,
+      depthWrite: false,
     })
 
     this.dustCluster = []
