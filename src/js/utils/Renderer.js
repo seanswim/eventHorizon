@@ -9,30 +9,17 @@ class Renderer extends THREE.WebGLRenderer {
     super({antialias: true, canvas: world.domElement, alpha: true})
     this.world = world
 
-    this.composer = new EffectComposer(this)
-    this.renderPass = new RenderPass(this.world.scene, this.world.camera)
-    this.composer.addPass(this.renderPass)
-    this.bloomPass = new UnrealBloomPass(
-      new Vector2(this.world.sizer.width, this.world.sizer.height), 
-      0.8, 
-      2.0, 
-      0.0
-    )
-    this.composer.addPass(this.bloomPass)
-
-    // this.setSize(this.world.sizer.width, this.world.sizer.height)
-    // this.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    this.setSize(this.world.sizer.width, this.world.sizer.height)
+    this.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   }
 
   resize() {
-    // this.setSize(this.world.sizer.width, this.world.sizer.height)
-    // this.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    this.bloomPass.setSize(this.world.sizer.width, this.world.sizer.height)
+    this.setSize(this.world.sizer.width, this.world.sizer.height)
+    this.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   }
 
   update() {
-    // this.render(this.world.scene, this.world.camera)    
-    this.composer.render()
+    this.render(this.world.scene, this.world.camera)    
   }
 }
 

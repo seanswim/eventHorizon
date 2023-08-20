@@ -8,6 +8,7 @@ import * as THREE from 'three'
 import DimensionCurve from "../models/components/dimensionCurve/dimensionCurve"
 import AccretionDisk from "../models/accDisk/AccretionDisk"
 import SpaceDust from "../models/components/spaceDust/spaceDust"
+import Postprocessor from "../utils/Postprocessor"
 
 class World {
   constructor(canvasEl) {
@@ -18,6 +19,7 @@ class World {
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
+    this.postprocessor = new Postprocessor(this, this.renderer)
 
     this.ton618 = new Ton618(this)
     // this.dimensionCurve = new DimensionCurve(this)
@@ -36,7 +38,8 @@ class World {
   }
 
   update() {
-    this.renderer.update()
+    // this.renderer.update()
+    this.postprocessor.update()
     // this.dimensionCurve.update()
     this.spaceDust.update()
     requestAnimationFrame(() => {
