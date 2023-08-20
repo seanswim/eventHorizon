@@ -13,6 +13,7 @@ class SpaceDust {
       map: textureMap,
       transparent: true,
       depthWrite: false,
+      side: THREE.DoubleSide
     })
 
     this.dustCluster = []
@@ -27,7 +28,7 @@ class SpaceDust {
       // dust.rotation.x = 0
       // dust.rotation.y = 0
       // dust.rotation.z = Math.random() * 2 * Math.PI
-      dust.material.opacity = 0.55
+      dust.material.opacity = 0.25
       this.dustCluster.push(dust)
     }
 

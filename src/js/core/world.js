@@ -24,7 +24,7 @@ class World {
     // this.accretionDisk = new AccretionDisk(this)
     this.spaceDust = new SpaceDust(this)
 
-    let light = new THREE.AmbientLight(0x555555)
+    let light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
     window.addEventListener('resize', () => this.resize())
