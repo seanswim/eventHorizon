@@ -1,41 +1,51 @@
 import * as THREE from 'three'
+import { getRandomInt, getRandomFloat } from '@/js/utils/Utils'
 
 class SpaceDust {
   constructor(world) {
     this.world = world
     const textureLoader = new THREE.TextureLoader()
-    const textureMap = textureLoader
+    const spaceDust1 = textureLoader
+    .setPath('src/assets/')
+    .load('spaceDust1.png')
+    const spaceDust2 = textureLoader
     .setPath('src/assets/')
     .load('spaceDust2.png')
-
-    this.geometry = new THREE.PlaneGeometry(2, 1)
-    this.material = new THREE.MeshLambertMaterial({
-      map: textureMap,
-      transparent: true,
-      depthWrite: false,
-      side: THREE.DoubleSide
-    })
+    const spaceDust3 = textureLoader
+    .setPath('src/assets/')
+    .load('spaceDust3.png')
+    const spaceDusts = [spaceDust2, spaceDust3, spaceDust2]
 
     this.dustCluster = []
-
+    
     for (let i = 0; i < 100; i++) {
-      let dust = new THREE.Mesh(this.geometry, this.material)
+      const geometry = new THREE.PlaneGeometry(
+        getRandomFloat(1, 2.4), 
+        getRandomFloat(1, 2)
+      )
+      const material = new THREE.MeshLambertMaterial({
+        map: spaceDusts[getRandomInt(0, 2)],
+        transparent: true,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      })
+      let dust = new THREE.Mesh(geometry, material)
       dust.position.set(
         Math.random()*6 -3,
         Math.random()*2 -1,
         Math.random()*3,
       )
-      // dust.rotation.x = 0
-      // dust.rotation.y = 0
-      // dust.rotation.z = Math.random() * 2 * Math.PI
-      dust.material.opacity = 0.25
+      dust.material.opacity = getRandomFloat(0.2, 0.55)
       this.dustCluster.push(dust)
     }
 
-    console.log(this.dustCluster)
-
     this.world.scene.add(...this.dustCluster)
+  }
 
+  update() {
+    this.dustCluster.forEach((dust, i) => {
+      dust.rotation.z -= getRandomFloat(0.0005, 0.001)
+    })
   }
 }
 

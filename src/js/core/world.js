@@ -38,6 +38,7 @@ class World {
   update() {
     this.renderer.update()
     // this.dimensionCurve.update()
+    this.spaceDust.update()
     requestAnimationFrame(() => {
       this.update()
     })
