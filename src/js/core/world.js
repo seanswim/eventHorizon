@@ -38,10 +38,11 @@ class World {
   }
 
   update() {
+    const deltaTime = this.clock.getDelta()
     // this.renderer.update()
     this.postprocessor.update()
     // this.dimensionCurve.update()
-    this.spaceDust.update()
+    this.spaceDust.update(deltaTime)
     requestAnimationFrame(() => {
       this.update()
     })
