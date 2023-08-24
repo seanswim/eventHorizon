@@ -16,7 +16,7 @@ class AccretionDisk {
       let z = 0
 
       // if (phi < Math.PI) {
-        let theta = (i / segments) * Math.PI /2
+        let theta = Math.sin((i * Math.PI) / (segments/2)) * Math.PI * 2
         x = radius * Math.sin(theta) * Math.cos(phi)
         y = radius * Math.sin(theta) * Math.sin(phi)
         z = radius * Math.cos(theta)
