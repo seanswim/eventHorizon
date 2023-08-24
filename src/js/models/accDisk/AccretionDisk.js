@@ -9,22 +9,17 @@ class AccretionDisk {
     const segments = 100
 
     for (let i = 0; i <= segments; i++) {
-      const angle = (i / segments) * Math.PI * 2
+      const phi = (i / segments) * Math.PI * 2
       
-      let x = Math.cos(angle) * radius
-      let y = Math.sin(angle) * radius
+      let x = Math.cos(phi) * radius
+      let y = Math.sin(phi) * radius
       let z = 0
-      if (angle < Math.PI) {
-        z = Math.sin(angle) * radius
-        const gapX = Math.sqrt(z*z + x*x) - Math.abs(x)
-        const gapY = Math.sqrt(z*z + y*y) - Math.abs(y)
-        // if (x >= 0) {
-        //   x -= gapX
-        // } else {
-        //   x += gapX
-        // }
-        x -= gapX
-        y -= gapY
+
+      if (phi < Math.PI) {
+        const theta = (1 - (i/segments)) * Math.PI/2
+        x = radius * Math.sin(theta) * Math.cos(phi)
+        y = radius * Math.sin(theta) * Math.sin(phi)
+        z = radius * Math.cos(theta)
       }
       circlePoints.push(new THREE.Vector3(x, y, z))
     }
