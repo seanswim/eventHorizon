@@ -52,7 +52,7 @@ class SpaceDust {
   update(deltaTime) {
     this.rotateAngle += deltaTime
     this.dustCluster.forEach((dust, i) => {
-      dust.rotation.z -= getRandomFloat(0.0005, 0.001)
+      dust.rotation.z -= getRandomFloat(0.0005, 0.0007)
       dust.position.x = Math.cos(Math.PI/180 * dust.alpha - this.rotateAngle/40) * dust.distance
       dust.position.z = Math.sin(Math.PI/180 * dust.alpha - this.rotateAngle/40) * dust.distance
     })
