@@ -23,8 +23,8 @@ class World {
 
     this.ton618 = new Ton618(this)
     // this.dimensionCurve = new DimensionCurve(this)
-    // this.accretionDisk = new AccretionDisk(this)
-    this.spaceDust = new SpaceDust(this)
+    this.accretionDisk = new AccretionDisk(this)
+    // this.spaceDust = new SpaceDust(this)
 
     let light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
@@ -42,7 +42,7 @@ class World {
     // this.renderer.update()
     this.postprocessor.update()
     // this.dimensionCurve.update()
-    this.spaceDust.update(deltaTime)
+    // this.spaceDust.update(deltaTime)
     requestAnimationFrame(() => {
       this.update()
     })
