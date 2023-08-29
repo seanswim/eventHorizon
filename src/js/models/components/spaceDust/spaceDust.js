@@ -17,7 +17,7 @@ class SpaceDust {
     const spaceDusts = [spaceDust2, spaceDust3, spaceDust2]
 
     this.dustCluster = []
-    this.radius = 2.5
+    this.radius = 3.1
     this.center = new THREE.Vector3(0.0, 0.0, 0.0)
     // this.center = this.world.ton618.mesh.position
     this.rotateAngle = 0

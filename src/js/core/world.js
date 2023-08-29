@@ -44,7 +44,7 @@ class World {
     // this.renderer.update()
     this.postprocessor.update()
     // this.dimensionCurve.update()
-    this.spaceDust.update(deltaTime)
+    this.spaceDust.update(deltaTime/2)
     // this.accretionDisk.update()
     this.ton618_gltf.update()
     requestAnimationFrame(() => {

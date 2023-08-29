@@ -9,8 +9,9 @@ class Ton618_gltf {
     const loader = new GLTFLoader()
 
     this.model = loader.setPath('src/assets/blackhole/').load('scene.gltf', (gltf) => {
-      
+  
       const mesh = gltf.scene
+      mesh.scale.set(4, 4, 4)
       this.mixer = new THREE.AnimationMixer(mesh)
       const clips = mesh.animations;
 
@@ -25,7 +26,7 @@ class Ton618_gltf {
 
   update() {
     // this.model.animate()
-    this.mixer.update(0.001)
+    // this.mixer.update(0.001)
   }
 }
 
