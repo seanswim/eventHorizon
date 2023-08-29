@@ -28,6 +28,12 @@ class AccretionDisk {
     const circlePoints_top = [];
     const circlePoints_bottom = [];
 
+    const TextureLoader = new THREE.TextureLoader();
+
+    const envMap = TextureLoader
+    .setPath('src/assets/')
+    .load('spaceDust3.png')
+
     for (let i = 0; i <= segments; i++) {
 
       const phi = bendingAngle; 
@@ -59,20 +65,21 @@ class AccretionDisk {
     const curve_top = new THREE.CatmullRomCurve3(circlePoints_top);
     const curve_bottom = new THREE.CatmullRomCurve3(circlePoints_bottom);
 
-    const geometry_top = new THREE.TubeGeometry(curve_top, segments, 0.001, 20, true)
-    const geometry_bottom = new THREE.TubeGeometry(curve_bottom, segments, 0.001, 20, true)
+    const geometry_top = new THREE.TubeGeometry(curve_top, segments, 0.01, 20, true)
+    const geometry_bottom = new THREE.TubeGeometry(curve_bottom, segments, 0.01, 20, true)
 
     const material = new THREE.ShaderMaterial({
       vertexShader: VertexShader,
       fragmentShader: FragmentShader,
       uniforms: {
-        uTime: { value: 0 }
+        uTime: { value: 0 },
+        envMap: { value: envMap },
       }
     })
 
     return [
-      new THREE.Line(geometry_top, material), 
-      new THREE.Line(geometry_bottom, material)
+      new THREE.Mesh(geometry_top, material), 
+      new THREE.Mesh(geometry_bottom, material)
     ]
   }
 
