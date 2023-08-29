@@ -18,7 +18,8 @@ class SpaceDust {
 
     this.dustCluster = []
     this.radius = 2.5
-    this.center = this.world.ton618.mesh.position
+    this.center = new THREE.Vector3(0.0, 0.0, 0.0)
+    // this.center = this.world.ton618.mesh.position
     this.rotateAngle = 0
     
     for (let i = 0; i < 450; i++) {
