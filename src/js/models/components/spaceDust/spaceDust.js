@@ -22,10 +22,10 @@ class SpaceDust {
     // this.center = this.world.ton618.mesh.position
     this.rotateAngle = 0
     
-    for (let i = 0; i < 450; i++) {
+    for (let i = 0; i < 550; i++) {
       const geometry = new THREE.PlaneGeometry(
-        getRandomFloat(1, 1.5), 
-        getRandomFloat(0.7, 1)
+        getRandomFloat(0.7, 1.5), 
+        getRandomFloat(0.5, 0.9)
       )
       const material = new THREE.MeshLambertMaterial({
         map: spaceDusts[getRandomInt(0, 2)],
