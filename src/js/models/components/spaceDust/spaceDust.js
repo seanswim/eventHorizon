@@ -5,16 +5,22 @@ class SpaceDust {
   constructor(world) {
     this.world = world
     const textureLoader = new THREE.TextureLoader()
-    const spaceDust1 = textureLoader
-    .setPath('src/assets/')
-    .load('spaceDust1.png')
     const spaceDust2 = textureLoader
     .setPath('src/assets/')
     .load('spaceDust2.png')
-    const spaceDust3 = textureLoader
+    const nebula1 = textureLoader
     .setPath('src/assets/')
-    .load('spaceDust3.png')
-    const spaceDusts = [spaceDust2, spaceDust3, spaceDust2]
+    .load('nebula1.png')
+    const nebula2 = textureLoader
+    .setPath('src/assets/')
+    .load('nebula2.png')
+    const nebula3 = textureLoader
+    .setPath('src/assets/')
+    .load('nebula3.png')
+    const nebula4 = textureLoader
+    .setPath('src/assets/')
+    .load('nebula4.png')
+    const spaceDusts = [spaceDust2, nebula1, nebula2, nebula3, nebula4]
 
     this.dustCluster = []
     this.radius = 3.1
@@ -22,10 +28,10 @@ class SpaceDust {
     // this.center = this.world.ton618.mesh.position
     this.rotateAngle = 0
     
-    for (let i = 0; i < 550; i++) {
+    for (let i = 0; i < 600; i++) {
       const geometry = new THREE.PlaneGeometry(
         getRandomFloat(0.7, 1.5), 
-        getRandomFloat(0.5, 0.9)
+        getRandomFloat(0.6, 0.9)
       )
       const material = new THREE.MeshLambertMaterial({
         map: spaceDusts[getRandomInt(0, 2)],

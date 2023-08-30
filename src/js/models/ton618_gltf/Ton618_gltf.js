@@ -1,22 +1,109 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import FragmentShader from './shaders/fragment.glsl?raw'
+import VertexShader from './shaders/vertex.glsl?raw'
 
 class Ton618_gltf {
+
   constructor(world) {
     this.world = world
     this.mixer = new THREE.AnimationMixer()
 
     const loader = new GLTFLoader()
+    const shaderMaterial = new THREE.ShaderMaterial({
+      fragmentShader: VertexShader,
+      vertexShader: FragmentShader,
+    });
 
     this.model = loader.setPath('src/assets/blackhole/').load('scene.gltf', (gltf) => {
   
       const mesh = gltf.scene
       mesh.scale.set(4, 4, 4)
-      this.mixer = new THREE.AnimationMixer(mesh)
-      const clips = mesh.animations;
 
-      gltf.animations.forEach(clip => {
-        this.mixer.clipAction(clip).play()
+      mesh.traverse((child) => {
+        
+        if (child.isMesh) {
+
+          const name = child.name
+
+          //black sphere 1
+          // if (name !== 'Blackhole_core_Blackhole_core_0') {
+          //   child.visible = false
+          // }
+          //black sphere 2
+          // if (name !== 'Blackhole_core001_Blackhole_core_0') {
+          //   child.visible = false
+          // }
+          //black sphere 3
+          // if (name !== 'Blackhole_skin_002_Blackhole_core_0') {
+          //   child.visible = false
+          // }
+          //black sphere 4
+          // if (name !== 'Blackhole_skin_004_Blackhole_core_0') {
+          //   child.visible = false
+          // }
+          //black sphere 5
+          // if (name !== 'Blackhole_skin_007_Blackhole_core_0') {
+          //   child.visible = false
+          // }
+          //black sphere 6
+          // if (name !== 'Blackhole_skin_011_Blackhole_core_0') {
+          //   child.visible = false
+          // } 
+
+          //white sphere 1
+          // if (name !== 'Blackhole_core002_Blackhole_ring2_0') {
+          //   child.visible = false
+          // }
+          //white sphere 2
+          // if (name !== 'Blackhole_skin_001_Blackhole_skin_0') {
+          //   child.visible = false
+          // }
+          //white sphere 3
+          // if (name !== 'Blackhole_skin_003_Blackhole_skin_0') {
+          //   child.visible = false
+          // }
+          //white sphere 4
+          // if (name !== 'Blackhole_skin_005_Blackhole_skin_0') {
+          //   child.visible = false
+          // }
+          //white sphere 5
+          // if (name !== 'Blackhole_skin_006_Blackhole_skin_inner_0') {
+          //   child.visible = false
+          // }
+          //white sphere 6
+          // if (name !== 'Blackhole_skin_008_Blackhole_skin_inner_0') {
+          //   child.visible = false
+          // } 
+          //white sphere 7
+          // if (name !== 'Blackhole_skin_009_Blackhole_skin_0') {
+          //   child.visible = false
+          // } 
+          //white sphere 8
+          // if (name !== 'Blackhole_skin_010_Blackhole_skin_0') {
+          //   child.visible = false
+          // } 
+          //white sphere 9
+          // if (name !== 'Blackhole_skin_012_Blackhole_skin_inner_0') {
+          //   child.visible = false
+          // } 
+          //white sphere 10
+          // if (name !== 'Blackhole_skin_013_Blackhole_ring2_0') {
+          //   child.visible = false
+          // } 
+
+          //Red accretion disk
+          if (name === 'Blackhole_ring_Blackhole_ring_0') {
+            child.scale.set(0.4, 0.4, 0.4)
+            console.log(child.material)
+            console.log(child.geometry)
+            console.log(shaderMaterial)
+            child.material = shaderMaterial
+          } else  {
+            child.visible = false
+          }
+
+        }
       })
 
       this.world.scene.add(gltf.scene)
@@ -25,8 +112,7 @@ class Ton618_gltf {
   }
 
   update() {
-    // this.model.animate()
-    // this.mixer.update(0.001)
+
   }
 }
 

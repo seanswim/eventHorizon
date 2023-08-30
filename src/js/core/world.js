@@ -28,7 +28,7 @@ class World {
     this.spaceDust = new SpaceDust(this)
     this.ton618_gltf = new Ton618_gltf(this)
 
-    let light = new THREE.AmbientLight(0xffffff)
+    let light = new THREE.AmbientLight(0xd1c5c5)
     this.scene.add(light)
 
     window.addEventListener('resize', () => this.resize())
