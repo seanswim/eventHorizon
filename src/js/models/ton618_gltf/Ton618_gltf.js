@@ -1,24 +1,22 @@
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import FragmentShader from './shaders/fragment.glsl?raw'
-import VertexShader from './shaders/vertex.glsl?raw'
+import fragmentShader from './shaders/fragment.glsl?raw'
+import vertexShader from './shaders/vertex.glsl?raw'
 
 class Ton618_gltf {
-
+  
   constructor(world) {
     this.world = world
     this.mixer = new THREE.AnimationMixer()
-
-    const loader = new GLTFLoader()
-    const shaderMaterial = new THREE.ShaderMaterial({
-      fragmentShader: VertexShader,
-      vertexShader: FragmentShader,
-    });
-
-    this.model = loader.setPath('src/assets/blackhole/').load('scene.gltf', (gltf) => {
-  
+    
+    this.model = this.world.loader.gltfLoader.setPath('src/assets/blackhole/').load('scene.gltf', (gltf) => {
+      
       const mesh = gltf.scene
       mesh.scale.set(4, 4, 4)
+      const shaderMaterial = new THREE.ShaderMaterial({
+        fragmentShader: fragmentShader,
+        vertexShader: vertexShader,
+        name: "Blackhole_ring"
+      });
 
       mesh.traverse((child) => {
         
@@ -89,24 +87,20 @@ class Ton618_gltf {
           // } 
           //white sphere 10
           if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
-            child.material = shaderMaterial
+            // child.material = shaderMaterial
           } 
 
           //Red accretion disk
           if (name === 'Blackhole_ring_Blackhole_ring_0') {
             child.scale.set(0.4, 0.4, 0.4)
-            console.log(child.material)
-            console.log(child.geometry)
-            console.log(shaderMaterial)
             child.material = shaderMaterial
+            child.visible = false
           }
 
         }
       })
-
       this.world.scene.add(gltf.scene)
     })
-
   }
 
   update() {

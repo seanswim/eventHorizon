@@ -27,16 +27,18 @@ class SpaceDust {
     this.center = new THREE.Vector3(0.0, 0.0, 0.0)
     this.rotateAngle = 0
     
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 1000; i++) {
       const geometry = new THREE.PlaneGeometry(
-        getRandomFloat(0.8, 3.5), 
-        getRandomFloat(0.8, 1.2)
+        getRandomFloat(0.68, 0.75), 
+        getRandomFloat(0.68, 0.72)
       )
       const material = new THREE.MeshLambertMaterial({
         map: spaceDusts[getRandomInt(0, 2)],
         transparent: true,
         depthWrite: false,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        depthTest: true,
       })
       let dust = new THREE.Mesh(geometry, material)
       const alpha = getRandomInt(0, 360) 

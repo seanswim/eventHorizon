@@ -1,10 +1,10 @@
 varying vec2 vUv;
-uniform float uTime;
 
 void main() {
-  // float pct = abs(sin(uTime));
 
-  vec2 st = vUv -0.5;
+  vec2 st = gl_FragCoord.xy;
+  float pct = distance(st,vec2(0.5));
+  vec3 color = vec3(pct);
 
-  gl_FragColor = vec4(st.x, st.y, 0.0, 1.0);
+  gl_FragColor = vec4(color, 1.0);
 }

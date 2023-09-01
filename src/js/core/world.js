@@ -20,14 +20,13 @@ class World {
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
-    this.postprocessor = new Postprocessor(this, this.renderer)
-
-    this.spaceDust = new SpaceDust(this)
     this.ton618_gltf = new Ton618_gltf(this)
-
+    this.spaceDust = new SpaceDust(this)
+    
     let light = new THREE.AmbientLight(0xe8e8e6)
     this.scene.add(light)
-
+    this.postprocessor = new Postprocessor(this, this.renderer)
+    
     window.addEventListener('resize', () => this.resize())
   }
 
