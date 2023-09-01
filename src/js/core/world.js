@@ -22,13 +22,10 @@ class World {
     this.camera = new Camera(this)
     this.postprocessor = new Postprocessor(this, this.renderer)
 
-    // this.ton618 = new Ton618(this)
-    // this.dimensionCurve = new DimensionCurve(this)
-    // this.accretionDisk = new AccretionDisk(this)
     this.spaceDust = new SpaceDust(this)
     this.ton618_gltf = new Ton618_gltf(this)
 
-    let light = new THREE.AmbientLight(0xd1c5c5)
+    let light = new THREE.AmbientLight(0xe8e8e6)
     this.scene.add(light)
 
     window.addEventListener('resize', () => this.resize())
@@ -41,11 +38,9 @@ class World {
 
   update() {
     const deltaTime = this.clock.getDelta()
-    // this.renderer.update()
+    this.renderer.update()
     this.postprocessor.update()
-    // this.dimensionCurve.update()
     this.spaceDust.update(deltaTime/2)
-    // this.accretionDisk.update()
     this.ton618_gltf.update()
     requestAnimationFrame(() => {
       this.update()

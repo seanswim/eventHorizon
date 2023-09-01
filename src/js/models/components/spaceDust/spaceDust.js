@@ -25,13 +25,12 @@ class SpaceDust {
     this.dustCluster = []
     this.radius = 3.1
     this.center = new THREE.Vector3(0.0, 0.0, 0.0)
-    // this.center = this.world.ton618.mesh.position
     this.rotateAngle = 0
     
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < 300; i++) {
       const geometry = new THREE.PlaneGeometry(
-        getRandomFloat(0.7, 1.5), 
-        getRandomFloat(0.6, 0.9)
+        getRandomFloat(0.8, 3.5), 
+        getRandomFloat(0.8, 1.2)
       )
       const material = new THREE.MeshLambertMaterial({
         map: spaceDusts[getRandomInt(0, 2)],
@@ -44,7 +43,7 @@ class SpaceDust {
       const distance = this.radius+Math.random()*3
       dust.position.set(
         Math.cos(Math.PI/180 * alpha) * distance -0.5,
-        Math.random() * 1.2 - 1.3,
+        Math.random() * 1.4 - 1.3,
         Math.sin(Math.PI/180 * alpha) * distance,
       )
       dust.alpha = alpha
@@ -59,7 +58,7 @@ class SpaceDust {
   update(deltaTime) {
     this.rotateAngle += deltaTime
     this.dustCluster.forEach((dust, i) => {
-      dust.rotation.z -= getRandomFloat(0.0005, 0.0007)
+      dust.rotation.z -= getRandomFloat(0.00002, 0.0002)
       dust.position.x = Math.cos(Math.PI/180 * dust.alpha - this.rotateAngle/40) * dust.distance
       dust.position.z = Math.sin(Math.PI/180 * dust.alpha - this.rotateAngle/40) * dust.distance
     })

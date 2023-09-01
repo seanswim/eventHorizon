@@ -88,9 +88,9 @@ class Ton618_gltf {
           //   child.visible = false
           // } 
           //white sphere 10
-          // if (name !== 'Blackhole_skin_013_Blackhole_ring2_0') {
-          //   child.visible = false
-          // } 
+          if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
+            child.material = shaderMaterial
+          } 
 
           //Red accretion disk
           if (name === 'Blackhole_ring_Blackhole_ring_0') {
@@ -99,8 +99,6 @@ class Ton618_gltf {
             console.log(child.geometry)
             console.log(shaderMaterial)
             child.material = shaderMaterial
-          } else  {
-            child.visible = false
           }
 
         }
