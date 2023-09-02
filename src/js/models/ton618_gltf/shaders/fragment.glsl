@@ -1,10 +1,21 @@
 varying vec2 vUv;
+uniform sampler2D textureMap; 
 
 void main() {
+  float pi = 3.14159265359;
+  vec2 st = vUv - 0.5;
+  float dist = distance(st, vec2(0.0));
+  vec4 color = texture2D(textureMap, vUv);
 
-  vec2 st = gl_FragCoord.xy;
-  float pct = distance(st,vec2(0.5));
-  vec3 color = vec3(pct);
+  if (dist < 0.23) {
+    discard;
+  }
 
-  gl_FragColor = vec4(color, 1.0);
+  vec3 whiteColor = vec3(1.0);
+  float strength = mix(color.rgb * 5.0, whiteColor, dist).r;
+
+  vec3 finalCol = color.rgb * strength;
+  float alpha = pow(dist* 2.02, 1.0);
+
+  gl_FragColor = vec4(finalCol.rgb, 1.0 - alpha);
 }

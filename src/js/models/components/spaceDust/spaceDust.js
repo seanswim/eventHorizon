@@ -23,14 +23,14 @@ class SpaceDust {
     const spaceDusts = [spaceDust2, nebula1, nebula2, nebula3, nebula4]
 
     this.dustCluster = []
-    this.radius = 3.1
+    this.radius = 4
     this.center = new THREE.Vector3(0.0, 0.0, 0.0)
     this.rotateAngle = 0
     
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 130; i++) {
       const geometry = new THREE.PlaneGeometry(
-        getRandomFloat(0.68, 0.75), 
-        getRandomFloat(0.68, 0.72)
+        getRandomFloat(1.68, 1.75), 
+        getRandomFloat(1.68, 1.72)
       )
       const material = new THREE.MeshLambertMaterial({
         map: spaceDusts[getRandomInt(0, 2)],
@@ -42,7 +42,7 @@ class SpaceDust {
       })
       let dust = new THREE.Mesh(geometry, material)
       const alpha = getRandomInt(0, 360) 
-      const distance = this.radius+Math.random()*3
+      const distance = this.radius+Math.random()*2
       dust.position.set(
         Math.cos(Math.PI/180 * alpha) * distance -0.5,
         Math.random() * 1.4 - 1.3,

@@ -23,7 +23,7 @@ class World {
     this.ton618_gltf = new Ton618_gltf(this)
     this.spaceDust = new SpaceDust(this)
     
-    let light = new THREE.AmbientLight(0xe8e8e6)
+    let light = new THREE.AmbientLight(0xffffff, 0.4)
     this.scene.add(light)
     this.postprocessor = new Postprocessor(this, this.renderer)
     
