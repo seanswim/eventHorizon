@@ -101,7 +101,7 @@ class Ton618_gltf {
             // } 
             //white sphere 10
             if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
-              // child.material = shaderMaterial
+              child.material = shaderMaterial
             } 
 
             //Red accretion disk
