@@ -16,7 +16,7 @@ class Ton618_gltf {
 
   loadGLTFModelAsync(modelPath) {
 
-    const shaderMaterial = new THREE.ShaderMaterial({
+    const diskShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         textureMap: { value: this.world.loader.textureLoader.setPath('src/assets/blackhole/textures/').load('Blackhole_ring_emissive.jpeg') }
       },
@@ -26,6 +26,8 @@ class Ton618_gltf {
       depthWrite: false,
       name: "Blackhole_ring"
     });
+
+    const ringShaderMaterial1 = new THREE.ShaderMaterial({})
 
     return new Promise((resolve, reject) => {
       this.world.loader.gltfLoader.load(modelPath, (gltf) => {
@@ -101,13 +103,13 @@ class Ton618_gltf {
             // } 
             //white sphere 10
             if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
-              child.material = shaderMaterial
+              
             } 
 
             //Red accretion disk
             if (name === 'Blackhole_ring_Blackhole_ring_0') {
               child.scale.set(0.55, 0.55, 0.55)
-              child.material = shaderMaterial
+              child.material = diskShaderMaterial
             }
 
           }
