@@ -10,7 +10,7 @@ class Camera extends THREE.PerspectiveCamera {
       100,
     )
     this.world = world
-    this.position.set( 0, 0.15, 7 )
+    this.position.set( 0, 0.35, 5.5 )
     this.controls = new OrbitControls(this, this.world.renderer.domElement)
   }
 

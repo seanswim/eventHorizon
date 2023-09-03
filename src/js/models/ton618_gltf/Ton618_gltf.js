@@ -1,6 +1,8 @@
 import * as THREE from 'three'
-import fragmentShader from './shaders/fragment.glsl?raw'
-import vertexShader from './shaders/vertex.glsl?raw'
+import diskFragmentShader from './shaders/diskShaders/fragment.glsl?raw'
+import diskVertexShader from './shaders/diskShaders/vertex.glsl?raw'
+import ringFragmentShader from './shaders/ringShaders/fragment.glsl?raw'
+import ringVertexShader from './shaders/ringShaders/vertex.glsl?raw'
 
 class Ton618_gltf {
   
@@ -18,16 +20,29 @@ class Ton618_gltf {
 
     const diskShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
-        textureMap: { value: this.world.loader.textureLoader.setPath('src/assets/blackhole/textures/').load('Blackhole_ring_emissive.jpeg') }
+        textureMap: { value: this.world.loader.textureLoader
+          .setPath('src/assets/blackhole/textures/')
+          .load('Blackhole_ring_emissive.jpeg') }
       },
-      fragmentShader: fragmentShader,
-      vertexShader: vertexShader,
+      fragmentShader: diskFragmentShader,
+      vertexShader: diskVertexShader,
       transparent: true,
       depthWrite: false,
-      name: "Blackhole_ring"
+      name: "Blackhole_disk"
     });
 
-    const ringShaderMaterial1 = new THREE.ShaderMaterial({})
+    const ringShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        textureMap: { value: this.world.loader.textureLoader
+          .setPath('src/assets/')
+          .load('back.png') }
+      },
+      fragmentShader: ringFragmentShader,
+      vertexShader: ringVertexShader,
+      transparent: true,
+      depthWrite: false,
+      name: 'Blackhole_ring'
+    })
 
     return new Promise((resolve, reject) => {
       this.world.loader.gltfLoader.load(modelPath, (gltf) => {
@@ -40,75 +55,51 @@ class Ton618_gltf {
 
             const name = child.name
 
-            //black sphere 1
-            // if (name !== 'Blackhole_core_Blackhole_core_0') {
-            //   child.visible = false
-            // }
-            //black sphere 2
-            // if (name !== 'Blackhole_core001_Blackhole_core_0') {
-            //   child.visible = false
-            // }
-            //black sphere 3
-            // if (name !== 'Blackhole_skin_002_Blackhole_core_0') {
-            //   child.visible = false
-            // }
-            //black sphere 4
-            // if (name !== 'Blackhole_skin_004_Blackhole_core_0') {
-            //   child.visible = false
-            // }
-            //black sphere 5
-            // if (name !== 'Blackhole_skin_007_Blackhole_core_0') {
-            //   child.visible = false
-            // }
-            //black sphere 6
-            // if (name !== 'Blackhole_skin_011_Blackhole_core_0') {
-            //   child.visible = false
-            // } 
-
             //white sphere 1
-            // if (name !== 'Blackhole_core002_Blackhole_ring2_0') {
-            //   child.visible = false
-            // }
+            if (name === 'Blackhole_core002_Blackhole_ring2_0') {
+              child.material = ringShaderMaterial
+            }
             //white sphere 2
-            // if (name !== 'Blackhole_skin_001_Blackhole_skin_0') {
-            //   child.visible = false
-            // }
+            if (name === 'Blackhole_skin_001_Blackhole_skin_0') {
+              child.material = ringShaderMaterial
+            }
             //white sphere 3
-            // if (name !== 'Blackhole_skin_003_Blackhole_skin_0') {
-            //   child.visible = false
-            // }
+            if (name === 'Blackhole_skin_003_Blackhole_skin_0') {
+              child.material = ringShaderMaterial
+            }
             //white sphere 4
-            // if (name !== 'Blackhole_skin_005_Blackhole_skin_0') {
-            //   child.visible = false
-            // }
+            if (name === 'Blackhole_skin_005_Blackhole_skin_0') {
+              child.material = ringShaderMaterial
+            }
             //white sphere 5
-            // if (name !== 'Blackhole_skin_006_Blackhole_skin_inner_0') {
-            //   child.visible = false
-            // }
+            if (name === 'Blackhole_skin_006_Blackhole_skin_inner_0') {
+              child.material = ringShaderMaterial
+            }
             //white sphere 6
-            // if (name !== 'Blackhole_skin_008_Blackhole_skin_inner_0') {
-            //   child.visible = false
-            // } 
+            if (name === 'Blackhole_skin_008_Blackhole_skin_inner_0') {
+              child.material = ringShaderMaterial
+            } 
             //white sphere 7
-            // if (name !== 'Blackhole_skin_009_Blackhole_skin_0') {
-            //   child.visible = false
-            // } 
+            if (name === 'Blackhole_skin_009_Blackhole_skin_0') {
+              child.material = ringShaderMaterial
+            } 
             //white sphere 8
-            // if (name !== 'Blackhole_skin_010_Blackhole_skin_0') {
-            //   child.visible = false
-            // } 
+            if (name === 'Blackhole_skin_010_Blackhole_skin_0') {
+              child.material = ringShaderMaterial
+            } 
             //white sphere 9
-            // if (name !== 'Blackhole_skin_012_Blackhole_skin_inner_0') {
-            //   child.visible = false
-            // } 
+            if (name === 'Blackhole_skin_012_Blackhole_skin_inner_0') {
+              child.material = ringShaderMaterial
+            } 
             //white sphere 10
             if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
-              
+              child.material = ringShaderMaterial
             } 
 
             //Red accretion disk
             if (name === 'Blackhole_ring_Blackhole_ring_0') {
-              child.scale.set(0.55, 0.55, 0.55)
+              // child.visible = false
+              child.scale.set(0.4, 0.4, 0.4)
               child.material = diskShaderMaterial
             }
 

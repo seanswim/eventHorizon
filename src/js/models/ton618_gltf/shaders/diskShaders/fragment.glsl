@@ -7,15 +7,15 @@ void main() {
   float dist = distance(st, vec2(0.0));
   vec4 color = texture2D(textureMap, vUv);
 
-  if (dist < 0.23) {
+  if (dist < 0.32) {
     discard;
   }
 
   vec3 whiteColor = vec3(1.0);
-  float strength = mix(color.rgb * 5.0, whiteColor, dist).r;
+  float strength = mix(color.rgb * 30.0, whiteColor, dist).r;
 
   vec3 finalCol = color.rgb * strength;
-  float alpha = pow(dist* 2.02, 1.0);
+  float alpha = pow(dist* 2.02, 2.0);
 
   gl_FragColor = vec4(finalCol.rgb, 1.0 - alpha);
 }

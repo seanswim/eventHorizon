@@ -39,7 +39,7 @@ class World {
     const deltaTime = this.clock.getDelta()
     this.renderer.update()
     this.postprocessor.update()
-    this.spaceDust.update(deltaTime/2)
+    this.spaceDust.update(deltaTime)
     this.ton618_gltf.update()
     requestAnimationFrame(() => {
       this.update()
