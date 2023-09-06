@@ -13,7 +13,59 @@ class Ton618_gltf {
 
   update() {
     if (!this.model) return
-    this.model.rotation.set(0, this.world.clock.getElapsedTime()/10, 0)
+
+    this.model.traverse((child) => {
+
+      if (child.isMesh) {
+
+        const name = child.name
+
+        if (name === 'Blackhole_ring_Blackhole_ring_0') {
+          child.rotation.set(0, 0, this.world.clock.getElapsedTime()/20)
+        }
+
+        //white sphere 1
+        if (name === 'Blackhole_core002_Blackhole_ring2_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        }
+        //white sphere 2
+        if (name === 'Blackhole_skin_001_Blackhole_skin_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        }
+        //white sphere 3
+        if (name === 'Blackhole_skin_003_Blackhole_skin_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        }
+        //white sphere 4
+        if (name === 'Blackhole_skin_005_Blackhole_skin_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        }
+        //white sphere 5
+        if (name === 'Blackhole_skin_006_Blackhole_skin_inner_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        }
+        //white sphere 6
+        if (name === 'Blackhole_skin_008_Blackhole_skin_inner_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        } 
+        //white sphere 7
+        if (name === 'Blackhole_skin_009_Blackhole_skin_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        } 
+        //white sphere 8
+        if (name === 'Blackhole_skin_010_Blackhole_skin_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        } 
+        //white sphere 9
+        if (name === 'Blackhole_skin_012_Blackhole_skin_inner_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        } 
+        //white sphere 10
+        if (name === 'Blackhole_skin_013_Blackhole_ring2_0') {
+          child.material.uniforms.uTime.value = this.world.clock.getElapsedTime();
+        } 
+      }
+    })
   }
 
   loadGLTFModelAsync(modelPath) {
@@ -35,7 +87,8 @@ class Ton618_gltf {
       uniforms: {
         textureMap: { value: this.world.loader.textureLoader
           .setPath('src/assets/')
-          .load('back.png') }
+          .load('back.png') },
+        uTime: { value: 0 },
       },
       fragmentShader: ringFragmentShader,
       vertexShader: ringVertexShader,
@@ -98,8 +151,7 @@ class Ton618_gltf {
 
             //Red accretion disk
             if (name === 'Blackhole_ring_Blackhole_ring_0') {
-              // child.visible = false
-              child.scale.set(0.4, 0.4, 0.4)
+              child.scale.set(0.5, 0.5, 0.5)
               child.material = diskShaderMaterial
             }
 

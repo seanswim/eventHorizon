@@ -7,12 +7,12 @@ void main() {
   float dist = distance(st, vec2(0.0));
   vec4 color = texture2D(textureMap, vUv);
 
-  if (dist < 0.32) {
+  if (dist < 0.31) {
     discard;
   }
 
   vec3 whiteColor = vec3(1.0);
-  float strength = mix(color.rgb * 30.0, whiteColor, dist).r;
+  float strength = mix(color.rgb * 2.3, whiteColor, dist).r;
 
   vec3 finalCol = color.rgb * strength;
   float alpha = pow(dist* 2.02, 2.0);
