@@ -1,11 +1,13 @@
+import gsap from 'gsap'
+
 class Controller {
   constructor(world) {
     this.x = 0
     this.y = 0.35
     this.z = 5.5
     this.world = world
-    this.velocityY = 0
-    this.velocityX = 0
+    this.velocityY = Math.random() / 1000
+    this.velocityX = Math.random() / 1000
 
     this.init()
   }
@@ -13,20 +15,28 @@ class Controller {
   init() {
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === 'd') {
-        // this.world.camera.rotation.y -= 0.1
-        this.velocityY -= 0.001
+        gsap.to(this, {
+          velocityY: this.velocityY - 0.0001,
+          ease: 'power4'
+        })
       }
       if (e.key === 'ArrowLeft' || e.key === 'a') {
-        // this.world.camera.rotation.y += 0.1
-        this.velocityY += 0.001
+        gsap.to(this, {
+          velocityY: this.velocityY + 0.0001,
+          ease: 'power4'
+        })
       }
       if (e.key === 'ArrowUp' || e.key === 'w') {
-        // this.world.camera.rotation.x += 0.1
-        this.velocityX += 0.001
+        gsap.to(this, {
+          velocityX: this.velocityX + 0.0001,
+          ease: 'power4'
+        })
       }
       if (e.key === 'ArrowDown' || e.key === 's') {
-        // this.world.camera.rotation.x -= 0.1
-        this.velocityX -= 0.001
+        gsap.to(this, {
+          velocityX: this.velocityX - 0.0001,
+          ease: 'power4'
+        })
       }
     })
   }
