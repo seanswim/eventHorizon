@@ -3,6 +3,7 @@ import Camera from "../utils/Camera"
 import Sizer from "../utils/Sizer"
 import Scene from "../utils/Scene"
 import SLoader from "../utils/Loader"
+import Controller from "../utils/Controller"
 import Ton618 from "../models/ton618/Ton618"
 import * as THREE from 'three'
 import DimensionCurve from "../models/components/dimensionCurve/dimensionCurve"
@@ -19,6 +20,7 @@ class World {
     this.sizer = new Sizer()
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
+    this.controller = new Controller(this)
     this.camera = new Camera(this)
     this.ton618_gltf = new Ton618_gltf(this)
     this.spaceDust = new SpaceDust(this)
@@ -41,6 +43,7 @@ class World {
     this.postprocessor.update()
     this.spaceDust.update(deltaTime)
     this.ton618_gltf.update()
+    this.controller.update()
     requestAnimationFrame(() => {
       this.update()
     })
