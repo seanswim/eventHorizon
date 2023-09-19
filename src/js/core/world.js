@@ -46,6 +46,7 @@ class World {
     // this.spaceDust.update(deltaTime)
     // this.ton618_gltf.update()
     // this.controller.update()
+    this.stars.update()
     requestAnimationFrame(() => {
       this.update()
     })

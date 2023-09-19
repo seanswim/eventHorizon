@@ -42,7 +42,7 @@ class Stars {
   }
 
   update() {
-    
+    console.log(this.points.geometry.attributes.position.array)
   }
 }
 
