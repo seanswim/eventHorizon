@@ -4,13 +4,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 class Camera extends THREE.PerspectiveCamera {
   constructor(world) {
     super(
-      75, 
+      60, 
       world.sizer.width / world.sizer.height,
-      0.1,
-      100,
+      1,
+      1000,
     )
     this.world = world
-    this.position.set( 0, 0.35, 5.5 )
+    this.position.set( 0, 0, 100 )
     // this.controls = new OrbitControls(this, this.world.renderer.domElement)
   }
 

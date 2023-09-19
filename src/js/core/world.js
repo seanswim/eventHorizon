@@ -11,6 +11,7 @@ import AccretionDisk from "../models/accDisk/AccretionDisk"
 import SpaceDust from "../models/components/spaceDust/spaceDust"
 import Postprocessor from "../utils/Postprocessor"
 import Ton618_gltf from "../models/ton618_gltf/Ton618_gltf"
+import Stars from "../models/stars/Stars"
 
 class World {
   constructor(canvasEl) {
@@ -20,10 +21,11 @@ class World {
     this.sizer = new Sizer()
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
-    this.controller = new Controller(this)
+    // this.controller = new Controller(this)
     this.camera = new Camera(this)
-    this.ton618_gltf = new Ton618_gltf(this)
-    this.spaceDust = new SpaceDust(this)
+    // this.ton618_gltf = new Ton618_gltf(this)
+    // this.spaceDust = new SpaceDust(this)
+    this.stars = new Stars(this)
     
     let light = new THREE.AmbientLight(0xffffff, 0.4)
     this.scene.add(light)
@@ -41,9 +43,9 @@ class World {
     const deltaTime = this.clock.getDelta()
     this.renderer.update()
     this.postprocessor.update()
-    this.spaceDust.update(deltaTime)
-    this.ton618_gltf.update()
-    this.controller.update()
+    // this.spaceDust.update(deltaTime)
+    // this.ton618_gltf.update()
+    // this.controller.update()
     requestAnimationFrame(() => {
       this.update()
     })
