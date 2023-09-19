@@ -7,10 +7,11 @@ class Camera extends THREE.PerspectiveCamera {
       60, 
       world.sizer.width / world.sizer.height,
       1,
-      1000,
+      10000,
     )
     this.world = world
     this.position.set( 0, 0, 100 )
+    this.rotateY(Math.PI/360 * 90)
     // this.controls = new OrbitControls(this, this.world.renderer.domElement)
   }
 

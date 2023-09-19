@@ -5,7 +5,8 @@ class Stars {
     this.world = world
     this.geometry = new THREE.BufferGeometry()
     this.material = new THREE.PointsMaterial({ 
-      color: 0x888888, 
+      // color: 0x888888, 
+      size: 1.2,
       map: new THREE.TextureLoader().load('src/assets/star.png'), 
       transparent: true,
       depthWrite: false,
@@ -32,7 +33,7 @@ class Stars {
 
       this.speed.push({
         velocity: 0,
-        acceleration: Math.random() / 3
+        acceleration: Math.random() / 100
       })
 
       vertices.push(x, y, z)
@@ -42,7 +43,21 @@ class Stars {
   }
 
   update() {
-    console.log(this.points.geometry.attributes.position.array)
+    console.log(this.world.camera)
+    const position = this.points.geometry.getAttribute('position')
+    const arr = position.array
+    for (let i = 0; i < arr.length; i += 3) {
+      const index = i/3
+      arr[i+2] += this.speed[index].velocity
+      this.speed[index].velocity += this.speed[index].acceleration
+
+      if (arr[i+2] > this.world.camera.position.z + 1000) {
+        arr[i+2] = Math.random() * 100 - 50
+        this.speed[index].velocity = 0;
+      }
+    }
+    
+    position.needsUpdate = true
   }
 }
 

@@ -21,8 +21,8 @@ class World {
     this.sizer = new Sizer()
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
-    // this.controller = new Controller(this)
     this.camera = new Camera(this)
+    this.controller = new Controller(this)
     // this.ton618_gltf = new Ton618_gltf(this)
     // this.spaceDust = new SpaceDust(this)
     this.stars = new Stars(this)
@@ -45,7 +45,7 @@ class World {
     this.postprocessor.update()
     // this.spaceDust.update(deltaTime)
     // this.ton618_gltf.update()
-    // this.controller.update()
+    this.controller.update()
     this.stars.update()
     requestAnimationFrame(() => {
       this.update()
