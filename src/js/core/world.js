@@ -12,6 +12,7 @@ import SpaceDust from "../models/components/spaceDust/spaceDust"
 import Postprocessor from "../utils/Postprocessor"
 import Ton618_gltf from "../models/ton618_gltf/Ton618_gltf"
 import Stars from "../models/stars/Stars"
+import Room from "../models/room/Room"
 
 class World {
   constructor(canvasEl) {
@@ -22,13 +23,14 @@ class World {
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
-    this.controller = new Controller(this)
+    // this.controller = new Controller(this)
     // this.ton618_gltf = new Ton618_gltf(this)
     // this.spaceDust = new SpaceDust(this)
-    this.stars = new Stars(this)
+    // this.stars = new Stars(this)
+    this.room = new Room(this)
     
-    let light = new THREE.AmbientLight(0xffffff, 0.4)
-    this.scene.add(light)
+    // let light = new THREE.AmbientLight(0xffffff, 0.4)
+    // this.scene.add(light)
     this.postprocessor = new Postprocessor(this, this.renderer)
     
     window.addEventListener('resize', () => this.resize())
@@ -45,8 +47,8 @@ class World {
     this.postprocessor.update()
     // this.spaceDust.update(deltaTime)
     // this.ton618_gltf.update()
-    this.controller.update()
-    this.stars.update()
+    // this.controller.update()
+    // this.stars.update()
     requestAnimationFrame(() => {
       this.update()
     })

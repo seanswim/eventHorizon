@@ -1,0 +1,11 @@
+Model Information:
+* title:	Project Icarus Concept Ship
+* source:	https://sketchfab.com/3d-models/project-icarus-concept-ship-62920d6c2df24832a504b250289d0b8c
+* author:	CMFDesign (https://sketchfab.com/CMFDesign)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Project Icarus Concept Ship" (https://sketchfab.com/3d-models/project-icarus-concept-ship-62920d6c2df24832a504b250289d0b8c) by CMFDesign (https://sketchfab.com/CMFDesign) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
