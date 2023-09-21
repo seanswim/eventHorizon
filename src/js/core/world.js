@@ -26,7 +26,7 @@ class World {
     // this.controller = new Controller(this)
     // this.ton618_gltf = new Ton618_gltf(this)
     // this.spaceDust = new SpaceDust(this)
-    // this.stars = new Stars(this)
+    this.stars = new Stars(this)
     this.room = new Room(this)
     
     // let light = new THREE.AmbientLight(0xffffff, 0.4)
@@ -48,7 +48,8 @@ class World {
     // this.spaceDust.update(deltaTime)
     // this.ton618_gltf.update()
     // this.controller.update()
-    // this.stars.update()
+    this.stars.update()
+    this.room.update(deltaTime)
     requestAnimationFrame(() => {
       this.update()
     })

@@ -43,7 +43,6 @@ class Stars {
   }
 
   update() {
-    console.log(this.world.camera)
     const position = this.points.geometry.getAttribute('position')
     const arr = position.array
     for (let i = 0; i < arr.length; i += 3) {
