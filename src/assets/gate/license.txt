@@ -1,0 +1,11 @@
+Model Information:
+* title:	Vault Door
+* source:	https://sketchfab.com/3d-models/vault-door-20d25f3bae24417a9b6cc5ba690c62f5
+* author:	Ray Ferric (https://sketchfab.com/rayferric)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Vault Door" (https://sketchfab.com/3d-models/vault-door-20d25f3bae24417a9b6cc5ba690c62f5) by Ray Ferric (https://sketchfab.com/rayferric) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

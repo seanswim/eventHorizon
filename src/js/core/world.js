@@ -12,7 +12,7 @@ import SpaceDust from "../models/components/spaceDust/spaceDust"
 import Postprocessor from "../utils/Postprocessor"
 import Ton618_gltf from "../models/ton618_gltf/Ton618_gltf"
 import Stars from "../models/stars/Stars"
-import Room from "../models/room/Room"
+import Gate from "../models/gate/Gate"
 
 class World {
   constructor(canvasEl) {
@@ -23,11 +23,11 @@ class World {
     this.scene = new Scene(this)
     this.renderer = new Renderer(this)
     this.camera = new Camera(this)
-    // this.controller = new Controller(this)
+    this.controller = new Controller(this)
     // this.ton618_gltf = new Ton618_gltf(this)
     // this.spaceDust = new SpaceDust(this)
     this.stars = new Stars(this)
-    this.room = new Room(this)
+    this.gate = new Gate(this)
     
     // let light = new THREE.AmbientLight(0xffffff, 0.4)
     // this.scene.add(light)
@@ -47,9 +47,9 @@ class World {
     this.postprocessor.update()
     // this.spaceDust.update(deltaTime)
     // this.ton618_gltf.update()
-    // this.controller.update()
+    this.controller.update()
     this.stars.update()
-    this.room.update(deltaTime)
+    this.gate.update(deltaTime)
     requestAnimationFrame(() => {
       this.update()
     })
