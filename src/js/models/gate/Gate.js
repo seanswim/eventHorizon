@@ -5,6 +5,9 @@ class Gate {
   constructor(world) {
     this.world = world
     this.mixer;
+    this.duration;
+    this.action;
+    this.isOpen = false;
     this.init()
   }
 
@@ -16,14 +19,14 @@ class Gate {
       'src/assets/gate/scene.gltf', 
       (gltf) => {
         const model = gltf.scene;
-        
-        console.log(gltf.animations)
 
         this.mixer = new THREE.AnimationMixer(model)
-        const action = this.mixer.clipAction(gltf.animations[0])
-        action.clampWhenFinished = true;
-        action.setLoop(THREE.LoopOnce, 1)
-        action.play()
+        this.action = this.mixer.clipAction(gltf.animations[0])
+        this.duration = gltf.animations[0].duration
+
+        this.action.clampWhenFinished = true;
+        this.action.setLoop(THREE.LoopOnce, 1)
+        this.action.play()
         
         model.scale.set(20, 20, 20)
 
@@ -34,21 +37,29 @@ class Gate {
         const light = new THREE.SpotLight(0xffcccb, 1, 80, Math.PI / 180 * 50)
         light.position.set(x, y + 14, z - 5)
         light.target = model
-        const lighthelper = new THREE.SpotLightHelper(light); 
 
-        this.world.scene.add(model, light, )
+        this.world.scene.add(model, light)
       }
     )
+    this.open()
   }
 
   open() {
-
+    window.addEventListener('click', () => {
+      this.isOpen = true
+    })
   }
 
   update(deltaTime) {
-    if (this.mixer) {
-      this.mixer.update(deltaTime/2)
+    if (!this.mixer) return
+    if (this.mixer.time > this.duration/2) {
+      if (this.isOpen) {
+        this.action.paused = false;
+      } else {
+        this.action.paused = true;
+      }
     }
+    this.mixer.update(deltaTime/2)
   }
 }
 
