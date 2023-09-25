@@ -42,7 +42,7 @@ class SpaceDust {
       })
       let dust = new THREE.Mesh(geometry, material)
       const alpha = getRandomInt(0, 360) 
-      const distance = this.radius+Math.random()*40
+      const distance = this.radius+Math.random()*30
       dust.position.set(
         Math.cos(Math.PI/180 * alpha) * distance,
         Math.random() * 50 - 25,

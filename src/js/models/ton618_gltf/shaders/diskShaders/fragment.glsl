@@ -7,7 +7,7 @@ void main() {
   float dist = distance(st, vec2(0.0));
   vec4 color = texture2D(textureMap, vUv);
 
-  if (dist < 0.31) {
+  if (dist < 0.30) {
     discard;
   }
 

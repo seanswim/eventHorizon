@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from 'gsap';
 
 class Gate {
 
@@ -40,12 +41,22 @@ class Gate {
         this.world.scene.add(model, light)
       }
     )
-    this.open()
   }
 
   open() {
-    window.addEventListener('click', () => {
-      this.isOpen = true
+    this.isOpen = true
+    const light = this.world.light
+    gsap
+    .timeline()
+    .to(light.light, {
+      intensity: 1.5,
+      ease: 'power0', 
+      duration: 3,
+      delay: 5
+    })
+    .to(light.light, {
+      intensity: 0.2,
+      ease: 'sine', 
     })
   }
 

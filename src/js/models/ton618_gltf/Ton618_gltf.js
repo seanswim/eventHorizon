@@ -21,7 +21,7 @@ class Ton618_gltf {
         const name = child.name
 
         if (name === 'Blackhole_ring_Blackhole_ring_0') {
-          child.rotation.set(0, 0, this.world.clock.getElapsedTime()/20)
+          child.rotation.set(0, 0, this.world.clock.getElapsedTime()/10)
         }
 
         //white sphere 1

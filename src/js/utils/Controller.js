@@ -43,9 +43,21 @@ class Controller {
 
   update() {
     if (this.velocityX !== 0) {
+      if (this.world.camera.rotation.x > 0.5) {
+        this.velocityX = - Math.random() / 1000
+      }
+      if (this.world.camera.rotation.x < -0.5) {
+        this.velocityX = Math.random() / 1000
+      }
       this.world.camera.rotation.x += this.velocityX
     }
     if (this.velocityY !== 0) {
+      if (this.world.camera.rotation.y > 0.5) {
+        this.velocityY = - Math.random() / 1000
+      }
+      if (this.world.camera.rotation.y < -0.5) {
+        this.velocityY = Math.random() / 1000
+      }
       this.world.camera.rotation.y += this.velocityY
     }
   }

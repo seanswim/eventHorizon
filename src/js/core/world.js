@@ -4,15 +4,14 @@ import Sizer from "../utils/Sizer"
 import Scene from "../utils/Scene"
 import SLoader from "../utils/Loader"
 import Controller from "../utils/Controller"
-import Ton618 from "../models/ton618/Ton618"
 import * as THREE from 'three'
-import DimensionCurve from "../models/components/dimensionCurve/dimensionCurve"
-import AccretionDisk from "../models/accDisk/AccretionDisk"
 import SpaceDust from "../models/components/spaceDust/spaceDust"
 import Postprocessor from "../utils/Postprocessor"
 import Ton618_gltf from "../models/ton618_gltf/Ton618_gltf"
 import Stars from "../models/stars/Stars"
 import Gate from "../models/gate/Gate"
+import Light from "../utils/Light"
+import UI from "../utils/UI"
 
 class World {
   constructor(canvasEl) {
@@ -26,11 +25,11 @@ class World {
     this.ton618_gltf = new Ton618_gltf(this)
     this.spaceDust = new SpaceDust(this)
     this.stars = new Stars(this)
-    // this.gate = new Gate(this)
     this.controller = new Controller(this)
+    this.light = new Light(this)
+    this.gate = new Gate(this)
+    this.UI = new UI(this)
     
-    let light = new THREE.AmbientLight(0xffffff, 0.2)
-    this.scene.add(light)
     this.postprocessor = new Postprocessor(this, this.renderer)
     
     window.addEventListener('resize', () => this.resize())
@@ -48,7 +47,7 @@ class World {
     this.spaceDust.update(deltaTime)
     this.ton618_gltf.update()
     this.stars.update()
-    // this.gate.update(deltaTime)
+    this.gate.update(deltaTime)
     this.controller.update()
     requestAnimationFrame(() => {
       this.update()
