@@ -6,7 +6,7 @@ class Camera extends THREE.PerspectiveCamera {
     super(
       60, 
       world.sizer.width / world.sizer.height,
-      1,
+      0.1,
       10000,
     )
     this.world = world

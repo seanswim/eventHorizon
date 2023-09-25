@@ -28,14 +28,13 @@ class Gate {
         this.action.setLoop(THREE.LoopOnce, 1)
         this.action.play()
         
-        model.scale.set(20, 20, 20)
-
-        const position = new THREE.Vector3(x, y - 5, z - 40); 
+        const position = new THREE.Vector3(x, y, z-1.5); 
         model.rotation.y = Math.PI
         model.position.copy(position);
 
-        const light = new THREE.SpotLight(0xffcccb, 1, 80, Math.PI / 180 * 50)
-        light.position.set(x, y + 14, z - 5)
+        const light = new THREE.SpotLight(0xffcccb, 1, 5, Math.PI / 180 * 30)
+        const helper = new THREE.SpotLightHelper(light)
+        light.position.set(x, y+1.3, z+.5)
         light.target = model
 
         this.world.scene.add(model, light)

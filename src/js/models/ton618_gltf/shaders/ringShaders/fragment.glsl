@@ -21,14 +21,14 @@ void main() {
   vec4 c = mix(color, color1, strength);
   color = c;
 
-  if (color.r < 0.3) {
-    float strength = smoothstep(-0.04, 0.3,color.r);
-    color = color + strength;
-  }
+  // if (color.r < 0.3) {
+  //   float strength = smoothstep(-0.04, 0.3,color.r);
+  //   color = color + strength;
+  // }
 
-  if (color.r < 0.0383) {
-    color = vec4(1.0, 0.5, 0.1, 1.0);
-  }
+  // if (color.r < 0.0383) {
+  //   color = vec4(1.0, 0.5, 0.1, 1.0);
+  // }
 
   vec4 finalCol = color;
 

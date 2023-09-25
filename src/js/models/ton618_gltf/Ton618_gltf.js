@@ -100,7 +100,7 @@ class Ton618_gltf {
     return new Promise((resolve, reject) => {
       this.world.loader.gltfLoader.load(modelPath, (gltf) => {
         const mesh = gltf.scene
-        mesh.scale.set(4, 4, 4)
+        mesh.scale.set(70, 70, 70)
 
         mesh.traverse((child) => {
           
@@ -170,6 +170,7 @@ class Ton618_gltf {
       const gltf = await this.loadGLTFModelAsync('src/assets/blackhole/scene.gltf');
 
       this.model = gltf
+      this.model.rotation.x = Math.PI / 180 * 10
     
       this.world.scene.add(this.model)
     } catch (error) {

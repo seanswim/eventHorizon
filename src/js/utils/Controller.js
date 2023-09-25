@@ -14,25 +14,25 @@ class Controller {
 
   init() {
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'd') {
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
         gsap.to(this, {
           velocityY: this.velocityY - 0.0002,
           ease: 'power4'
         })
       }
-      if (e.key === 'ArrowLeft' || e.key === 'a') {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         gsap.to(this, {
           velocityY: this.velocityY + 0.0002,
           ease: 'power4'
         })
       }
-      if (e.key === 'ArrowUp' || e.key === 'w') {
+      if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
         gsap.to(this, {
           velocityX: this.velocityX + 0.0002,
           ease: 'power4'
         })
       }
-      if (e.key === 'ArrowDown' || e.key === 's') {
+      if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
         gsap.to(this, {
           velocityX: this.velocityX - 0.0002,
           ease: 'power4'
