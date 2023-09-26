@@ -1,7 +1,9 @@
 class UI {
   constructor(world) {
     this.world = world
+    this.startLoading()
     this.openUI()
+    this.controllerUI()
   }
 
   startLoading = () => {
@@ -12,16 +14,7 @@ class UI {
     const button = document.createElement("button");
     button.textContent = "Open the gate"
     button.setAttribute("name", "Open")
-    button.setAttribute("style", `
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      transform: translate(-50%, -50%);
-      cursor:pointer;
-      padding: 30px 40px;
-      border-radius: 12px;
-      font-size: 24px`
-    )
+    button.setAttribute("id", "open-btn")
     const container = document.querySelector('#container')
     container.appendChild(button)
     
@@ -29,6 +22,30 @@ class UI {
       this.world.gate.open()
       container.removeChild(button)
     })
+  }
+
+  controllerUI = () => {
+    const left = document.createElement("button")
+    const right = document.createElement("button")
+    const up = document.createElement("button")
+    const down = document.createElement("button")
+    left.textContent = "A"
+    right.textContent = "D"
+    down.textContent = "S"
+    up.textContent = "W"
+    left.setAttribute("id", "left")
+    left.setAttribute("class", "controller")
+    right.setAttribute("id", "right")
+    right.setAttribute("class", "controller")
+    down.setAttribute("id", "down")
+    down.setAttribute("class", "controller")
+    up.setAttribute("id", "up")
+    up.setAttribute("class", "controller")
+    const container = document.querySelector('#container')
+    container.appendChild(left)
+    container.appendChild(right)
+    container.appendChild(down)
+    container.appendChild(up)
   }
 
   update() {

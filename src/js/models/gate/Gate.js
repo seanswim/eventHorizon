@@ -9,6 +9,7 @@ class Gate {
     this.duration;
     this.action;
     this.isOpen = false;
+    this.loading = 0;
     this.init()
   }
 
@@ -39,6 +40,20 @@ class Gate {
         light.target = model
 
         this.world.scene.add(model, light)
+      },
+      (xhr) => {
+        const bar = document.querySelector('.progress')
+        const loader = document.querySelector('#loader')
+        this.loading = xhr.loaded / xhr.total * 100
+        bar.style.width = (xhr.loaded / (xhr.total * 2) * 100) + "%"
+        if (this.loading === 100) {
+          gsap.to(bar.style, {
+            width: '100%',
+            duration: 15
+          }).then(() => {
+            loader.style.display = 'none'
+          })
+        }
       }
     )
   }
@@ -52,10 +67,11 @@ class Gate {
       intensity: 1.5,
       ease: 'power0', 
       duration: 3,
-      delay: 5
+      delay: 3
     })
     .to(light.light, {
-      intensity: 0.2,
+      intensity: 0.4,
+      duration: 2,
       ease: 'sine', 
     })
   }
