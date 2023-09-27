@@ -25,10 +25,10 @@ class World {
     this.ton618_gltf = new Ton618_gltf(this)
     this.spaceDust = new SpaceDust(this)
     this.stars = new Stars(this)
-    this.controller = new Controller(this)
     this.light = new Light(this)
     this.gate = new Gate(this)
     this.UI = new UI(this)
+    this.controller = new Controller(this)
     
     this.postprocessor = new Postprocessor(this, this.renderer)
     

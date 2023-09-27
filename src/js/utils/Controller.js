@@ -13,6 +13,7 @@ class Controller {
   }
 
   init() {
+
     window.addEventListener('keydown', (e) => {
       const left = document.querySelector("#left")
       const right = document.querySelector("#right")
@@ -68,6 +69,19 @@ class Controller {
         down.setAttribute("class", "controller")
       }
     })
+
+    const left = document.querySelector("#left")
+    const right = document.querySelector("#right")
+    const up = document.querySelector("#up")
+    const down = document.querySelector("#down")
+
+    left.addEventListener('click', (e) =>{
+      gsap.to(this, {
+        velocityY: this.velocityY + 0.0002,
+        ease: 'power4'
+      })
+    })
+
   }
 
   update() {
