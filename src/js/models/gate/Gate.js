@@ -61,7 +61,7 @@ class Gate {
       delay: 3
     })
     .to(light.light, {
-      intensity: 0.4,
+      intensity: 0.3,
       duration: 2,
       ease: 'sine', 
     })

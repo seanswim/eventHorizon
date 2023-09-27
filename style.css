@@ -87,6 +87,10 @@ html, body {
   background-color: rgba(205, 209, 228, 0.4);
 }
 
+.controller:focus {
+  outline:none;
+}
+
 #left {
   top: 90%; 
   left: calc(50% - 70px); 

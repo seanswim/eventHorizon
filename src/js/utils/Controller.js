@@ -75,10 +75,63 @@ class Controller {
     const up = document.querySelector("#up")
     const down = document.querySelector("#down")
 
-    left.addEventListener('click', (e) =>{
-      gsap.to(this, {
-        velocityY: this.velocityY + 0.0002,
-        ease: 'power4'
+    left.addEventListener('mousedown', (e) =>{
+      const onMouseHold = () => {
+        gsap.to(this, {
+          velocityY: this.velocityY + 0.0002,
+          ease: 'power4'
+        })
+      }
+      const interval = setInterval(onMouseHold, 100)
+      left.setAttribute("class", "controller active")
+      left.addEventListener('mouseup', (e) => {
+        left.setAttribute("class", "controller")
+        clearInterval(interval)
+      })
+    })
+
+    right.addEventListener('mousedown', (e) =>{
+      const onMouseHold = () => {
+        gsap.to(this, {
+          velocityY: this.velocityY - 0.0002,
+          ease: 'power4'
+        })
+      }
+      const interval = setInterval(onMouseHold, 100)
+      right.setAttribute("class", "controller active")
+      right.addEventListener('mouseup', (e) => {
+        right.setAttribute("class", "controller")
+        clearInterval(interval)
+      })
+    })
+
+    up.addEventListener('mousedown', (e) =>{
+      const onMouseHold = () => {
+        gsap.to(this, {
+          velocityX: this.velocityX + 0.0002,
+          ease: 'power4'
+        })
+      }
+      const interval = setInterval(onMouseHold, 100)
+      up.setAttribute("class", "controller active")
+      up.addEventListener('mouseup', (e) => {
+        up.setAttribute("class", "controller")
+        clearInterval(interval)
+      })
+    })
+
+    down.addEventListener('mousedown', (e) =>{
+      const onMouseHold = () => {
+        gsap.to(this, {
+          velocityX: this.velocityX - 0.0002,
+          ease: 'power4'
+        })
+      }
+      const interval = setInterval(onMouseHold, 100)
+      down.setAttribute("class", "controller active")
+      down.addEventListener('mouseup', (e) => {
+        down.setAttribute("class", "controller")
+        clearInterval(interval)
       })
     })
 
