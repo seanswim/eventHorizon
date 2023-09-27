@@ -43,17 +43,8 @@ class Gate {
       },
       (xhr) => {
         const bar = document.querySelector('.progress')
-        const loader = document.querySelector('#loader')
         this.loading = xhr.loaded / xhr.total * 100
         bar.style.width = (xhr.loaded / (xhr.total * 2) * 100) + "%"
-        if (this.loading === 100) {
-          gsap.to(bar.style, {
-            width: '100%',
-            duration: 15
-          }).then(() => {
-            loader.style.display = 'none'
-          })
-        }
       }
     )
   }
@@ -78,14 +69,28 @@ class Gate {
 
   update(deltaTime) {
     if (!this.mixer) return
-    if (this.mixer.time > this.duration/2) {
-      if (this.isOpen) {
-        this.action.paused = false;
-      } else {
+
+    if (!this.isOpen) {
+
+      this.mixer.update(deltaTime * 100)
+
+      if (this.mixer.time > this.duration/2) {
         this.action.paused = true;
+        const loader = document.querySelector('#loader')
+        const bar = document.querySelector('.progress')
+
+        gsap.to(bar.style, {
+          width: '100%',
+          duration: 3,
+        }).then(() => {
+          loader.style.display = 'none'
+        })
       }
+
+    } else {
+      this.action.paused = false;
+      this.mixer.update(deltaTime / 2)
     }
-    this.mixer.update(deltaTime/2)
   }
 }
 
