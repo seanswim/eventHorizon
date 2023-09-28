@@ -1,7 +1,7 @@
-import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
 import { Vector2 } from 'three/src/math/Vector2';
 
 class Postprocessor {
@@ -13,10 +13,11 @@ class Postprocessor {
     this.effectComposer.addPass(new RenderPass(this.world.scene, this.world.camera))
     this.bloomPass = new UnrealBloomPass(
       new Vector2(this.world.sizer.width, this.world.sizer.height), 
-      0.8, 
-      2.0, 
+      0.7, 
+      0.0, 
       0.0
     )
+
     this.effectComposer.addPass(this.bloomPass)
   }
 

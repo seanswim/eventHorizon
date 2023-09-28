@@ -10,6 +10,8 @@ class Gate {
     this.action;
     this.isOpen = false;
     this.loading = 0;
+    this.model;
+    this.light;
     this.init()
   }
 
@@ -21,6 +23,7 @@ class Gate {
       'src/assets/gate/scene.gltf', 
       (gltf) => {
         const model = gltf.scene;
+        this.model = model;
 
         this.mixer = new THREE.AnimationMixer(model)
         this.action = this.mixer.clipAction(gltf.animations[0])
@@ -38,6 +41,7 @@ class Gate {
         const helper = new THREE.SpotLightHelper(light)
         light.position.set(x, y+1.3, z+.5)
         light.target = model
+        this.light = light
 
         this.world.scene.add(model, light)
       },
@@ -64,7 +68,32 @@ class Gate {
       intensity: 0.3,
       duration: 2,
       ease: 'sine', 
+      onComplete: () => {
+        this.world.stars.isActive = true
+      }
     })
+
+    setTimeout(() => {
+
+      gsap.to(this.model.rotation, {
+        z: -45 * Math.PI/180,
+        ease: 'power3',
+        duration: 5,
+      })
+
+      gsap
+      .timeline()
+      .to(this.model.position, {
+        x: 20,
+        z: 150,
+        duration: 15,
+        ease: 'power1',
+        onComplete: () => {
+          this.world.scene.remove(this.model, this.light)
+        }
+      })
+
+    }, 15000)
   }
 
   update(deltaTime) {

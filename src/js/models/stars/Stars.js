@@ -3,9 +3,9 @@ import * as THREE from 'three'
 class Stars {
   constructor(world) {
     this.world = world
+    this.isActive = false
     this.geometry = new THREE.BufferGeometry()
     this.material = new THREE.PointsMaterial({ 
-      // color: 0x888888, 
       size: 0.5,
       map: new THREE.TextureLoader().load('src/assets/star.png'), 
       transparent: true,
@@ -43,6 +43,7 @@ class Stars {
   }
 
   update() {
+    if (!this.isActive) return
     const position = this.points.geometry.getAttribute('position')
     const arr = position.array
     for (let i = 0; i < arr.length; i += 3) {
