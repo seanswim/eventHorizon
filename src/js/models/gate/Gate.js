@@ -38,7 +38,6 @@ class Gate {
         model.position.copy(position);
 
         const light = new THREE.SpotLight(0xffcccb, 1, 5, Math.PI / 180 * 30)
-        const helper = new THREE.SpotLightHelper(light)
         light.position.set(x, y+1.3, z+.5)
         light.target = model
         this.light = light
@@ -48,7 +47,7 @@ class Gate {
       (xhr) => {
         const bar = document.querySelector('.progress')
         this.loading = xhr.loaded / xhr.total * 100
-        bar.style.width = (xhr.loaded / (xhr.total * 2) * 100) + "%"
+        bar.style.width = (xhr.loaded / (xhr.total * 1.2) * 100) + "%"
       }
     )
   }
@@ -62,7 +61,7 @@ class Gate {
       intensity: 1.5,
       ease: 'power0', 
       duration: 3,
-      delay: 3
+      delay: 2
     })
     .to(light.light, {
       intensity: 0.3,
@@ -97,28 +96,26 @@ class Gate {
   }
 
   update(deltaTime) {
+
     if (!this.mixer) return
 
     if (!this.isOpen) {
 
-      this.mixer.update(deltaTime * 100)
-
-      if (this.mixer.time > this.duration/2) {
+      const bar = document.querySelector('.progress')
+      if (this.mixer.time < this.duration * (45/100)) {
+        this.mixer.update(deltaTime * 25)
+        bar.style.width = `${85 + (this.mixer.time / (this.duration * (45/100)) * 15)}%` 
+      } else if (this.action.paused === false) {
         this.action.paused = true;
         const loader = document.querySelector('#loader')
-        const bar = document.querySelector('.progress')
-
-        gsap.to(bar.style, {
-          width: '100%',
-          duration: 3,
-        }).then(() => {
-          loader.style.display = 'none'
-        })
+        loader.style.display = 'none'
+      } else {
+        return
       }
 
     } else {
       this.action.paused = false;
-      this.mixer.update(deltaTime / 2)
+      this.mixer.update(deltaTime)
     }
   }
 }

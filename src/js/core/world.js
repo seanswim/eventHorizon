@@ -14,6 +14,9 @@ import Light from "../utils/Light"
 import UI from "../utils/UI"
 
 class World {
+
+  static interval = 1000 / 60
+
   constructor(canvasEl) {
     this.loader = SLoader
     this.domElement = canvasEl
@@ -29,6 +32,8 @@ class World {
     this.gate = new Gate(this)
     this.UI = new UI(this)
     this.controller = new Controller(this)
+
+    this.then = Date.now()
     
     this.postprocessor = new Postprocessor(this, this.renderer)
     
@@ -41,7 +46,17 @@ class World {
   }
 
   update() {
+
     const deltaTime = this.clock.getDelta()
+    const now = Date.now()
+    const delta = now - this.then
+
+    requestAnimationFrame(() => {
+      this.update()
+    })
+
+    if (delta < World.interval) return;
+
     this.renderer.update()
     this.postprocessor.update()
     this.spaceDust.update(deltaTime)
@@ -49,9 +64,8 @@ class World {
     this.stars.update()
     this.gate.update(deltaTime)
     this.controller.update()
-    requestAnimationFrame(() => {
-      this.update()
-    })
+
+    this.then = now - (delta % World.interval)
   }
 }
 

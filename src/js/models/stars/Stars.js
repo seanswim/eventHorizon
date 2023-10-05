@@ -33,7 +33,7 @@ class Stars {
 
       this.speed.push({
         velocity: 0,
-        acceleration: Math.random() / 100
+        acceleration: Math.random() / 300
       })
 
       vertices.push(x, y, z)
