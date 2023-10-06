@@ -15,8 +15,6 @@ import UI from "../utils/UI"
 
 class World {
 
-  static interval = 1000 / 60
-
   constructor(canvasEl) {
     this.loader = SLoader
     this.domElement = canvasEl
@@ -32,10 +30,10 @@ class World {
     this.gate = new Gate(this)
     this.UI = new UI(this)
     this.controller = new Controller(this)
-
-    this.then = Date.now()
-    
+  
     this.postprocessor = new Postprocessor(this, this.renderer)
+
+    this.lastTimestamp = Date.now()
     
     window.addEventListener('resize', () => this.resize())
   }
@@ -47,15 +45,8 @@ class World {
 
   update() {
 
-    const deltaTime = this.clock.getDelta()
-    const now = Date.now()
-    const delta = now - this.then
-
-    requestAnimationFrame(() => {
-      this.update()
-    })
-
-    if (delta < World.interval) return;
+    const deltaTime = (Date.now() - this.lastTimestamp) / 1000
+    this.lastTimestamp = Date.now()
 
     this.renderer.update()
     this.postprocessor.update()
@@ -65,7 +56,9 @@ class World {
     this.gate.update(deltaTime)
     this.controller.update()
 
-    this.then = now - (delta % World.interval)
+    requestAnimationFrame(() => {
+      this.update()
+    })
   }
 }
 

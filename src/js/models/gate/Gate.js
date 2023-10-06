@@ -54,14 +54,16 @@ class Gate {
 
   open() {
     this.isOpen = true
+    this.action.paused = false
     const light = this.world.light
+    
     gsap
     .timeline()
     .to(light.light, {
       intensity: 1.5,
       ease: 'power0', 
       duration: 3,
-      delay: 2
+      delay: 2.5
     })
     .to(light.light, {
       intensity: 0.3,
@@ -97,25 +99,24 @@ class Gate {
 
   update(deltaTime) {
 
+
     if (!this.mixer) return
 
     if (!this.isOpen) {
 
       const bar = document.querySelector('.progress')
+
       if (this.mixer.time < this.duration * (45/100)) {
-        this.mixer.update(deltaTime * 25)
+        this.mixer.update(deltaTime)
         bar.style.width = `${85 + (this.mixer.time / (this.duration * (45/100)) * 15)}%` 
       } else if (this.action.paused === false) {
         this.action.paused = true;
         const loader = document.querySelector('#loader')
         loader.style.display = 'none'
-      } else {
-        return
-      }
+      } else return
 
     } else {
-      this.action.paused = false;
-      this.mixer.update(deltaTime)
+      this.mixer.update(deltaTime / 2)
     }
   }
 }
