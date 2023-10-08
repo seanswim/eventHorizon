@@ -4,6 +4,7 @@ import { getRandomInt, getRandomFloat } from '@/js/utils/Utils'
 class SpaceDust {
   constructor(world) {
     this.world = world
+    
     const textureLoader = new THREE.TextureLoader()
     const spaceDust2 = textureLoader
     .setPath('src/assets/')
