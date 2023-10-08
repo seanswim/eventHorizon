@@ -85,7 +85,7 @@ class Gate {
       gsap
       .timeline()
       .to(this.model.position, {
-        x: 20,
+        x: 0,
         z: 150,
         duration: 15,
         ease: 'power1',
@@ -93,6 +93,8 @@ class Gate {
           this.world.scene.remove(this.model, this.light)
         }
       })
+
+      this.world.camera.shake()
 
     }, 15000)
   }

@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 class Camera extends THREE.PerspectiveCamera {
   constructor(world) {
@@ -11,12 +10,48 @@ class Camera extends THREE.PerspectiveCamera {
     )
     this.world = world
     this.position.set( 0, 5, 100 )
-    // this.controls = new OrbitControls(this, this.world.renderer.domElement)
   }
 
   resize() {
     this.aspect = this.world.sizer.width / this.world.sizer.height
     this.updateProjectionMatrix()
+  }
+
+  shake() {
+
+    let isShaking = false;
+    let shakeMagnitude = 0.4; 
+
+    const shakeScreen = () => {
+      if (isShaking) {
+        const dx = (Math.random() - 0.5) * shakeMagnitude;
+        const dy = (Math.random() - 0.5) * shakeMagnitude;
+
+        this.position.x += dx;
+        this.position.y += dy;
+
+        setTimeout(() => {
+          this.position.set(0, 5, 100); 
+          this.world.controller.velocityY = this.world.controller.velocityY * 1.2
+          this.world.controller.velocityX = this.world.controller.velocityX * 1.2
+          isShaking = false; 
+        }, 150); 
+      }
+    }
+
+    const startScreenShake = () => {
+      if (!isShaking) {
+        isShaking = true;
+        const shakeInterval = setInterval(shakeScreen, 20); 
+        setTimeout(() => {
+          clearInterval(shakeInterval);
+          isShaking = false;
+          this.position.set(0, 5, 100);
+        }, 1000);
+      }
+    }
+
+    startScreenShake()
   }
 }
 

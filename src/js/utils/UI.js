@@ -1,13 +1,8 @@
 class UI {
   constructor(world) {
     this.world = world
-    this.startLoading()
     this.openUI()
     this.controllerUI()
-  }
-
-  startLoading = () => {
-
   }
 
   openUI = () => {
@@ -48,9 +43,6 @@ class UI {
     container.appendChild(up)
   }
 
-  update() {
-
-  }
 }
 
 export default UI
