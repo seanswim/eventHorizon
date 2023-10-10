@@ -106,12 +106,15 @@ class Gate {
 
     if (!this.isOpen) {
 
+      console.log('duration: ', this.duration)
+
       const bar = document.querySelector('.progress')
 
       if (this.mixer.time < this.duration * (45/100)) {
         this.mixer.update(deltaTime)
         bar.style.width = `${85 + (this.mixer.time / (this.duration * (45/100)) * 15)}%` 
       } else if (this.action.paused === false) {
+        console.log('mixertime: ', this.mixer.time)
         this.action.paused = true;
         const loader = document.querySelector('#loader')
         loader.style.display = 'none'

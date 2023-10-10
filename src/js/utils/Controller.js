@@ -21,31 +21,19 @@ class Controller {
       const down = document.querySelector("#down")
 
       if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        gsap.to(this, {
-          velocityY: this.velocityY - 0.0002,
-          ease: 'power4'
-        })
+        this.velocityY -= 0.0002
         right.setAttribute("class", "controller active")
       }
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        gsap.to(this, {
-          velocityY: this.velocityY + 0.0002,
-          ease: 'power4'
-        })
+        this.velocityY += 0.0002
         left.setAttribute("class", "controller active")
       }
       if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
-        gsap.to(this, {
-          velocityX: this.velocityX + 0.0002,
-          ease: 'power4'
-        })
+        this.velocityX += 0.0002
         up.setAttribute("class", "controller active")
       }
       if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
-        gsap.to(this, {
-          velocityX: this.velocityX - 0.0002,
-          ease: 'power4'
-        })
+        this.velocityX -= 0.0002
         down.setAttribute("class", "controller active")
       }
     })
@@ -77,10 +65,7 @@ class Controller {
 
     left.addEventListener('mousedown', (e) =>{
       const onMouseHold = () => {
-        gsap.to(this, {
-          velocityY: this.velocityY + 0.0002,
-          ease: 'power4'
-        })
+        this.velocityY += 0.0002
       }
       const interval = setInterval(onMouseHold, 100)
       left.setAttribute("class", "controller active")
@@ -92,10 +77,7 @@ class Controller {
 
     right.addEventListener('mousedown', (e) =>{
       const onMouseHold = () => {
-        gsap.to(this, {
-          velocityY: this.velocityY - 0.0002,
-          ease: 'power4'
-        })
+        this.velocityY -= 0.0002
       }
       const interval = setInterval(onMouseHold, 100)
       right.setAttribute("class", "controller active")
@@ -107,10 +89,7 @@ class Controller {
 
     up.addEventListener('mousedown', (e) =>{
       const onMouseHold = () => {
-        gsap.to(this, {
-          velocityX: this.velocityX + 0.0002,
-          ease: 'power4'
-        })
+        this.velocityX += 0.0002
       }
       const interval = setInterval(onMouseHold, 100)
       up.setAttribute("class", "controller active")
@@ -122,10 +101,7 @@ class Controller {
 
     down.addEventListener('mousedown', (e) =>{
       const onMouseHold = () => {
-        gsap.to(this, {
-          velocityX: this.velocityX - 0.0002,
-          ease: 'power4'
-        })
+        this.velocityX -= 0.0002
       }
       const interval = setInterval(onMouseHold, 100)
       down.setAttribute("class", "controller active")
@@ -140,19 +116,31 @@ class Controller {
   update() {
     if (this.velocityX !== 0) {
       if (this.world.camera.rotation.x > 0.5) {
-        this.velocityX = - Math.random() / 1000
-      }
-      if (this.world.camera.rotation.x < -0.5) {
-        this.velocityX = Math.random() / 1000
-      }
+        this.velocityX = - 0.001
+        gsap.to(this.world.camera.rotation, {
+          x: 0.45
+        })
+      } else if (this.world.camera.rotation.x < -0.5) {
+        this.velocityX = 0.001
+        gsap.to(this.world.camera.rotation, {
+          x: -0.45
+        })
+
+      } 
       this.world.camera.rotation.x += this.velocityX
     }
     if (this.velocityY !== 0) {
       if (this.world.camera.rotation.y > 0.5) {
-        this.velocityY = - Math.random() / 1000
+        this.velocityY = - 0.001
+        gsap.to(this.world.camera.rotation, {
+          y: 0.45
+        })
       }
       if (this.world.camera.rotation.y < -0.5) {
-        this.velocityY = Math.random() / 1000
+        this.velocityY = 0.001
+        gsap.to(this.world.camera.rotation, {
+          y: - 0.45
+        })
       }
       this.world.camera.rotation.y += this.velocityY
     }
